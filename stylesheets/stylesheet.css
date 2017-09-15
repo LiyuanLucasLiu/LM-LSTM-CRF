@@ -1,0 +1,391 @@
+/*******************************************************************************
+Slate Theme for GitHub Pages
+by Jason Costello, @jsncostello
+*******************************************************************************/
+
+@import url(normalize.css);
+@import url(pygment_trac.css);
+
+/*******************************************************************************
+Theme Styles
+*******************************************************************************/
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  color:#373737;
+  background: #212121;
+  font-size: 18px;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+  margin: 10px 0;
+  font-weight: 700;
+  color:#222222;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+h1#project_title {
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+h3 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+h4 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 21px;
+}
+
+h5 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 18px;
+}
+
+h6 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 16px;
+}
+
+p {
+  font-family: "Roboto Slab",
+  font-size: 18px;
+  margin: 0px 0 15px 0;
+}
+
+footer p {
+  color: #f2f2f2;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px dotted #666;
+  color: inherit;
+  text-shadow: none;
+}
+
+a:hover, a:focus {border-bottom: 1px solid #0090ff;}
+
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+img {
+  position: relative;
+  margin: 0 auto;
+  max-width: 739px;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+
+  box-shadow: 0 0 5px #ebebeb;
+  -webkit-box-shadow: 0 0 5px #ebebeb;
+  -moz-box-shadow: 0 0 5px #ebebeb;
+  -o-box-shadow: 0 0 5px #ebebeb;
+  -ms-box-shadow: 0 0 5px #ebebeb;
+}
+
+p img {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  text-align: center;
+  border: none;
+}
+
+pre, code {
+  width: 100%;
+  color: #000;
+  background-color: #eee;
+
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-size: 14px;
+
+
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+pre {
+  padding: 10px 20px;
+  overflow: auto;
+}
+
+code {
+  padding: 3px;
+  margin: 0 3px;
+}
+
+pre code {
+  display: block;
+  box-shadow: none;
+}
+
+blockquote {
+  color: #666;
+  margin: 0 0 20px 2px;
+  padding-left: 20px;
+  border-left: 3px solid #bbb;
+  font-style: italic;
+}
+
+ul, ol, dl {
+  margin: 0 0 15px 0;
+  padding-left: 20px;
+}
+
+dl dt {
+  font-weight: bold;
+}
+
+dl dd {
+  margin-left: 0;
+  padding-left: 0;
+  font-style: italic;
+}
+
+dl p {
+  padding-left: 20px;
+  font-style: italic;
+}
+
+hr {
+  height: 1px;
+  margin-bottom: 5px;
+  border: none;
+  background: url('../images/bg_hr.png') repeat-x center;
+}
+
+table {
+  border: 1px solid #373737;
+  margin-bottom: 20px;
+  text-align: left;
+ }
+
+th {
+  padding: 10px;
+  background: #222;
+  color: #fff;
+ }
+
+td {
+  padding: 10px;
+  border: 1px solid #222;
+ }
+
+form {
+  background: #f2f2f2;
+  padding: 20px;
+}
+
+/*******************************************************************************
+Full-Width Styles
+*******************************************************************************/
+
+.outer {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.inner {
+  position: relative;
+  max-width: 960px;
+  padding: 20px 10px;
+  margin: 0 auto;
+}
+
+#forkme_banner {
+  display: block;
+  position: absolute;
+  top:0;
+  right: 10px;
+  z-index: 10;
+  padding: 10px 20px 10px 50px;
+  color: #fff;
+  background: url('../images/blacktocat.svg') #0090ff no-repeat 8% 50%;
+  background-size: 25px;
+  font-weight: 700;
+  border: none;
+}
+
+#forkme_banner:hover {
+  background-color: #1883ed;
+}
+
+header {
+  color: #f2f2f2;
+}
+
+#header_wrap {
+  background: #212121;
+}
+
+#header_wrap .inner {
+  padding: 60px 10px 0px 0px;
+}
+
+#project_title {
+  margin: 0;
+  color: #fff;
+  font-size: 54px;
+  font-weight: 700;
+}
+
+#project_tagline {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 300;
+  background: none;
+}
+
+#project_author {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 300;
+  background: none;
+}
+
+
+.downloads {
+  display: block;
+  padding-left: 50px;
+  color: #f2f2f2;
+  position: relative;
+  height: 70px;
+  background: url(../images/download.svg) no-repeat center left;
+  background-size: 25px 20px;
+}
+
+.downloads a {
+  margin-right: 20px;
+}
+.downloads a:hover {
+  text-decoration: underline solid #fff;
+}
+
+#main_content {
+  padding-top: 40px;
+}
+
+#main_content.inner {
+  background-color: #fff;
+  padding: 70px 100px;
+  box-shadow: 0 0 5px #ebebeb;
+  -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  -o-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  -ms-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+#reference {
+  width: 100%;
+
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-size: 14px;
+}
+
+#footer_wrap {
+  background: #212121;
+}
+
+/*******************************************************************************
+Small Device Styles
+*******************************************************************************/
+
+@media screen and (max-width: 992px) {
+  img {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+
+  .downloads {
+    display: none;
+  }
+
+  .outer {
+    padding: 0;
+  }
+
+  .inner {
+    min-width: 320px;
+    max-width: 480px;
+  }
+
+  #header_wrap .inner {
+    padding: 60px 10px;
+  }
+
+  #main_content.inner {
+    padding: 10px;
+  }
+
+  #project_title {
+  font-size: 32px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 21px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
+
+  h6 {
+    font-size: 12px;
+  }
+
+  code, pre {
+    min-width: 320px;
+    max-width: 480px;
+    font-size: 11px;
+  }
+}
