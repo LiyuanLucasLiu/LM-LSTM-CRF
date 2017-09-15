@@ -2,9 +2,9 @@
 
 This project provides high-performance character-aware sequence labeling tools and tutorials. Model details can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library.
 
-LM-LSTM-CRF achieves F1 score of 91.71+/-0.10 on CoNLL03 NER task, without using any additional corpus.
+LM-LSTM-CRF achieves F1 score of 91.71+/-0.10 on the CoNLL 2003 NER dataset, without using any additional corpus or resource.
 
-The documents would be available soon.
+The documents would be available [here](http://lm-lstm-crf.readthedocs.io/en/latest/).
 
 ## Quick Links
 
@@ -18,42 +18,42 @@ The documents would be available soon.
 
 <p align="center"><img width="100%" src="docs/framework.png"/></p>
 
-As visualized above, we use conditional random field (CRF) to capture labels' dependency, and adopt hierarchical LSTM to take char-level and word-level input. 
-The char-level structure is further guided by language model, while pre-trained word embedding is leveraged in word-level.
-Language model and sequence labeling make predictions at word-level, and are trained at the same time.
-[Highway networks]("https://arxiv.org/abs/1507.06228") are used to transform output of char-level into different semantic spaces, which mediate these two tasks and allows language model to empower sequence labeling.
+As visualized above, we use conditional random field (CRF) to capture label dependencies, and adopt a hierarchical LSTM to leverage both char-level and word-level inputs. 
+The char-level structure is further guided by a language model, while pre-trained word embeddings are leveraged in word-level.
+The language model and the sequence labeling model are trained at the same time, and both make predictions at word-level.
+[Highway networks]("https://arxiv.org/abs/1507.06228") are used to transform the output of char-level LSTM into different semantic spaces, and thus mediating these two tasks and allowing language model to empower sequence labeling.
 
 ## Installation
 
-For training, a GPU is strongly recommended for speed. CPU is supported but training could be very slow.
+For training, a GPU is strongly recommended for speed. CPU is supported but training could be extremely slow.
 
 ### PyTorch
 
-The code based on PyTorch; you can find installation instructions [here](http://pytorch.org/). 
+The code is based on PyTorch. You can find installation instructions [here](http://pytorch.org/). 
 
 ### Dependencies
 
-The code is written in Python 3.6; its dependencies are in the file ```requirements.txt```. You can install these dependencies like this:
+The code is written in Python 3.6. Its dependencies are summarized in the file ```requirements.txt```. You can install these dependencies like this:
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Data
 
-We mainly focus on CoNLL 2003 NER task, and the code takes its format as input. 
+We mainly focus on the CoNLL 2003 NER dataset, and the code takes its original format as input. 
 However, due to the license issue, we are restricted to distribute this dataset.
 You should be able to get it [here](http://aclweb.org/anthology/W03-0419).
-You can also search it on github, there might be someone who released it.
+You may also want to search online (e.g., Github), someone might release it accidentally.
 
 ### Format
 
-We assume the corpus is formatted as CoNLL03 NER corpus.
-Specifically, empty lines are used as separators between sentences, and the separator between documents is a special line:
+We assume the corpus is formatted as same as the CoNLL 2003 NER dataset.
+More specifically, **empty lines** are used as separators between sentences, and the separator between documents is a special line as below.
 ```
 -DOCSTART- -X- -X- -X- O
 ```
-Other lines contains words, labels and other fields. Word must be the first field, label mush be the last, and these fields are separated by space.
-For example, WSJ portion of PTB POS tagging corpus should be corpus like:
+Other lines contains words, labels and other fields. **Word** must be the **first** field, **label** mush be the **last**, and these fields are **separated by space**.
+For example, the first several lines in the WSJ portion of the PTB POS tagging corpus should be like the following snippet.
 
 ```
 -DOCSTART- -X- -X- -X- O
@@ -82,14 +82,17 @@ Nov. NNP
 
 ## Usage
 
-Here we provides implements for two models, one is LM-LSTM-CRF, the other is its variant, LSTM-CRF, which only contains the word-level structure and CRF.
+Here we provide implementations for two models, one is **LM-LSTM-CRF** and the other is its variant, **LSTM-CRF**, which only contains the word-level structure and CRF.
 ```train_wc.py``` and ```eval_wc.py``` are scripts for LM-LSTM-CRF, while ```train_w.py``` and ```eval_w.py``` are scripts for LSTM-CRF.
-The usage of these scripts can be accessed by ````-h````, e.g, 
+The usages of these scripts can be accessed by the parameter ````-h````, i.e., 
 ```
 python train_wc.py -h
+python train_w.py -h
+python eval_wc.py -h
+python eval_w.py -h
 ```
 
-The default running command for NER, Noun Phrase Chunking are:
+The default running commands for NER and POS tagging, and NP Chunking are:
 
 - Named Entity Recognition (NER):
 ```
@@ -106,15 +109,15 @@ python train_wc.py --train_file ./data/pos/train.txt --dev_file ./data/pos/testa
 python train_wc.py --train_file ./data/np/train.txt.iobes --dev_file ./data/np/testa.txt.iobes --test_file ./data/np/testb.txt.iobes --checkpoint ./checkpoint/np_ --caseless --fine_tune --high_way --co_train --least_iters 100
 ```
 
-For other datasets or tasks, you may wanna try different stopping parameters, especially, for smaller dataset, you may want to set ```least_iters``` to a larger value; and for some tasks, if the speed of loss decreasing is too slow, you may want to set ```lr``` to a larger value.
+For other datasets or tasks, you may wanna try different stopping parameters, especially, for smaller dataset, you may want to set ```least_iters``` to a larger value; and for some tasks, if the speed of loss decreasing is too slow, you may want to increase ```lr```.
 
 ## Benchmarks
 
-Here we compare LM-LSTM-CRF with recent state-of-the art models on CoNLL00 Chunking, CoNLL03 NER, and WSJ PTB POS Tagging task.
+Here we compare LM-LSTM-CRF with recent state-of-the-art models on the CoNLL 2000 Chunking dataset, the CoNLL 2003 NER dataset, and the WSJ portion of the PTB POS Tagging dataset.
 
 ### NER
 
-When only trained the on the CoNLL03 English NER corpus, the results are summarized below:
+When models are only trained on the CoNLL 2003 English NER dataset, the results are summarized as below.
 
 |Model | Max(F1) | Mean(F1) | Std(F1) | Reported(F1) | Time(h) |
 | ------------- |-------------| -----| -----| -----| ---- |
@@ -124,7 +127,7 @@ When only trained the on the CoNLL03 English NER corpus, the results are summari
 
 ### POS
 
-When only trained the on WSJ portion of PTB POS Tagging corpus, the results are summarized below:
+When models are only trained on the WSJ portion of the PTB POS Tagging dataset, the results are summarized as below.
 
 |Model | Max(Acc) | Mean(Acc) | Std(Acc) | Reported(Acc) | Time(h) |
 | ------------- |-------------| -----| -----| -----| ---- |
@@ -134,7 +137,7 @@ When only trained the on WSJ portion of PTB POS Tagging corpus, the results are 
 
 ### Chunking
 
-When only trained on the CoNLL00 Chunking corpus, the results are summarized below:
+When models are only trained on the CoNLL 2000 Chunking dataset, the results are summarized as below.
 
 |Model | Max(F1) | Mean(F1) | Std(F1) | Time(h) |
 | ------------- |-------------| -----| -----| ----|
