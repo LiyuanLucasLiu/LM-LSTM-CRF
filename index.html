@@ -33,7 +33,7 @@
     <section class="outer">
       <div class="downloads inner">
         <a class="zip_download_link" href="https://arxiv.org/pdf/1709.04109.pdf">Paper</a>
-        <a class="tar_download_link" href="#Ref">Reference</a>
+        <a class="tar_download_link" href="#Ref">Bib Tex</a>
         <a class="zip_download_link" href="http://lm-lstm-crf.readthedocs.io/en/latest/">Documentation</a>
       </div>
       <p>
@@ -61,23 +61,23 @@
       <p align="center"><img width="100%" alt="framework" src="docs/framework.png"/></p>
 
       <p>
-        As visualized above, we use conditional random field (CRF) to capture labels' dependency, and adopt hierarchical LSTM to take char-level and word-level input. 
-        The char-level structure is further guided by language model, while pre-trained word embedding is leveraged in word-level.
-        Language model and sequence labeling make predictions at word-level, and are trained at the same time.
-        <a href="https://arxiv.org/abs/1507.06228">Highway networks</a> are used to transform output of char-level into different semantic spaces, which mediate these two tasks and allows language model to empower sequence labeling.
+        As visualized above, we use conditional random field (CRF) to capture label dependencies, and adopt a hierarchical LSTM to leverage both char-level and word-level inputs. 
+        The char-level structure is further guided by a language model, while pre-trained word embeddings are leveraged in word-level. 
+        The language model and the sequence labeling model are trained at the same time, and both make predictions at word-level.
+        <a href="https://arxiv.org/abs/1507.06228">Highway networks</a> are used to transform the output of char-level LSTM into different semantic spaces, and thus mediating these two tasks and allowing language model to empower sequence labeling.
       </p>
 
       <h1>Experiments</h1>
         <p>
-        Here we compare LM-LSTM-CRF with recent state-of-the art models on CoNLL00 Chunking, CoNLL03 NER, and WSJ PTB POS Tagging task. All experiments are conducted on a GTX 1080 GPU.
+        Here we compare LM-LSTM-CRF with recent state-of-the-art models on the CoNLL 2000 Chunking dataset, the CoNLL 2003 NER dataset, and the WSJ portion of the PTB POS Tagging dataset. All experiments are conducted on a GTX 1080 GPU.
         </p>
 
         <h2>NER</h2>
 
-        When only trained the on the CoNLL03 English NER corpus, the results are summarized below:
+        When models are only trained on the CoNLL 2003 English NER dataset, the results are summarized as below.
 
         <table align="center">
-        <caption>Table. 1 Performance on CoNLL03 NER task</caption>
+        <caption>Table. 1 Performance on the CoNLL 2003 NER dataset</caption>
         <tr>
           <th>Method</th>
           <th>Max(F1)</th> 
@@ -114,10 +114,10 @@
 
         <h2>POS</h2>
 
-        When only trained the on WSJ portion of PTB POS Tagging corpus, the results are summarized below:
+        When models are only trained on the WSJ portion of the PTB POS Tagging dataset, the results are summarized as below.
 
         <table align="center">
-        <caption>Table. 2 Performance on WSJ-PTB POS-Tagging task</caption>
+        <caption>Table. 2 Performance on the WSJ portion of the PTB POS Tagging dataset</caption>
         <tr>
           <th>Method</th>
           <th>Max(F1)</th> 
@@ -154,7 +154,7 @@
 
         <h2>Chunking</h2>
 
-        When only trained the on CoNLL00 Chunking corpus, the results are summarized below:
+        When models are only trained on the CoNLL 2000 Chunking dataset, the results are summarized as below.
 
         <table align="center">
         <caption>Table. 2 Performance on CoNLL00 Chunking task</caption>
@@ -191,7 +191,7 @@
       <h1 id="Ref">Reference</h1>
 
       <p>
-      Please cite the following paper if you find the codes and datasets useful:
+      Please cite the following paper if you find the codes and datasets useful.
       </p>
 
       <p id="reference">
