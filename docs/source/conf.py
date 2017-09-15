@@ -19,20 +19,8 @@
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('../..'))
-
-def run_apidoc(_):
-    from sphinx.apidoc import main
-    import os
-    import sys
-    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-    cur_dir = os.path.abspath(os.path.dirname(__file__))
-    module = '../../model/'
-    output_path = cur_dir
-    main(['-e', '-o', output_path, module, '--force'])
-
-def setup(app):
-    app.connect('builder-inited', run_apidoc)
 
 # -- General configuration ------------------------------------------------
 
@@ -101,7 +89,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -139,12 +126,10 @@ html_sidebars = {
     ]
 }
 
-
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'LM-LSTM-CRFdoc'
-
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -174,7 +159,6 @@ latex_documents = [
      'Liyuan Liu, Frank Xu, Jingbo Shang', 'manual'),
 ]
 
-
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
@@ -183,7 +167,6 @@ man_pages = [
     (master_doc, 'lm-lstm-crf', 'LM-LSTM-CRF Documentation',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output -------------------------------------------
 
