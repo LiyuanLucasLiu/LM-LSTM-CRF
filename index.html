@@ -12,7 +12,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,700,700italic' rel='stylesheet' type='text/css'>
 
-    <title>ReHession</title>
+    <title>LM-LSTM-CRF</title>
   </head>
 
   <body>
@@ -20,22 +20,21 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/LiyuanLucasLiu/ReHession">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/LiyuanLucasLiu/LM-LSTM-CRF">View on GitHub</a>
 
-          <h2 id="project_tagline">Heterogeneous Supervision for Relation Extraction: <br>A Representation Learning Approach</h2>
-
-                    
+          <h2 id="project_tagline">Empower Sequence Labeling with Task-Aware Language Model</h2>
+            
           <h3 id="project_author">
-          <a href="https://liyuanlucasliu.github.io/">Liyuan Liu</a>, <a href="http://xren7.web.engr.illinois.edu/">Xiang Ren</a>, Qi Zhu, <a href="http://shizhi2.web.engr.illinois.edu/">Shi Zhi</a>, <a href="http://huangui2.web.engr.illinois.edu/">Huan Gui</a>, <a href="http://nlp.cs.rpi.edu/hengji.html">Heng Ji</a>, <a href="http://hanj.cs.illinois.edu/">Jiawei Han</a>
+          <a href="https://liyuanlucasliu.github.io/">Liyuan Liu</a>, <a href="shangjingbo1226.github.io/">Jingbo Shang</a>, <a href="frankxfz.me">Frank F. Xu</a>, <a href="http://xren7.web.engr.illinois.edu/">Xiang Ren</a>, <a href="http://huangui2.web.engr.illinois.edu/">Huan Gui</a>, <a href="http://jianpeng.web.engr.illinois.edu/">Jian Peng</a>, <a href="http://hanj.cs.illinois.edu/">Jiawei Han</a>
           </h3>
         </header>
     </div>
 
     <section class="outer">
       <div class="downloads inner">
-        <a class="zip_download_link" href="https://arxiv.org/pdf/1707.00166.pdf">Paper</a>
-        <a class="tar_download_link" href="./resources/ReHession.pdf">Slides</a>
+        <a class="zip_download_link" href="https://arxiv.org/pdf/1709.04109.pdf">Paper</a>
         <a class="tar_download_link" href="#Ref">Reference</a>
+        <a class="zip_download_link" href="http://lm-lstm-crf.readthedocs.io/en/latest/">Documentation</a>
       </div>
       <p>
     </section>
@@ -45,233 +44,149 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-      <h1>Relation Extraction</h1>
+      <h1>Sequence Labeling</h1>
         <p>
-        Sentence-level Relation Extraction: classify a <em>relation mention</em> into a set of <em>relation types of interest</em> or <em>Not-Target-Type (None)</em>
+          Linguistic sequence labeling is a general modeling approach that encompasses a variety of problems, such as <em>part-of-speech tagging</em> and <em>named entity recognition</em>.
         </p>
 
-
-        <dl>
-        <dt>Relation Mention</dt>
-          <dd>
-            an entity pair with a sentence / context.
-            <br>
-            E.g., ("Hussein", "Amman'', Hussein was born in Amman on 14 November 1935.) 
-          </dd>
-        <dt>Relation Types of Interest</dt>
-          <dd>
-            A set of relation types.
-            <br>
-            E.g., {Born-in, President-of, Died-in, Parents-of, ...}
-          </dd>
-        <dt>Relation Extraction</dt>
-          <dd>
-            predict Born-in for ("Hussein", "Amman'', Hussein was born in Amman on 14 November 1935.)
-          </dd> 
-        </dl>
-
-        <h2>Distant Supervision</h2>
-
+      <h1>Challenges</h1>
         <p>
-        Automatically generate annotations by Knowledge Base (KB).
-        </p>
-        <code>
-        return r for (e1, e2, s) if r(e1, e2) in KB
-        </code>
-        <p>
-          For example, because <em>Born-in</em>(Obama, USA) and <em>President-of</em>(Obama, USA) and <em>Citizen-of</em>(Obama, USA) exists in KB, ("Obama", "USA", Obama was born in Honolulu, Hawaii, USA as he has always said) would be annotated as <em>Born-in</em> (correct) and <em>President-of</em> (wrong).
-        </p>
-        
-        <h2>Heterogeneous Supervision</h2>
-
-        <p> 
-        Distant supervision only encodes KB, while we have more than KB.
+          Recent advances in neural networks (NNs) make it possible to build reliable models without handcrafted features.
+          However, in many cases, it is hard to obtain sufficient annotations to train these models.
         </p>
 
-
-        <ul>
-        <li>
-          Knowledge Base:
-          <ul>
-            <li>
-              <code>
-              return Born_in for (e1, e2, s) if Born_in(e1, e2) in KB
-              </code>
-            </li>
-            <li>
-            <code>
-              return Died_in for (e1, e2, s) if Died_in(e1, e2) in KB
-            </code>
-            </li>
-          </ul>
-        </li>
-        <li>
-          Heuristic Patterns:
-          <ul>
-            <li>
-            <code>
-              return Born_in for (e1, e2, s) if match('* born in *', s)
-            </code>
-            </li>
-            <li>
-            <code>
-              return Died_in for (e1, e2, s) if match('* died in *', s)
-            </code>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      
-      <p>
-      <em>Heterogeneous Supervision</em> encodes heterogeneous supervision by means of labeling functions.
-      </p>
-
-      <h2>Challenges</h2>
-
-      <ul>
-        <li>
-        Original <b>Relation Extraction</b> Task
-        </li>
-        <li>
-        <b>True Label Discovery</b>: Resolves conflicts among Heterogeneous Supervision      
-        </li>
-      </ul>
-
-      <img alt="Conflicts among Heterogeneous Supervision" src="./images/conflicts.png">
 
       <h1>Our Solution</h1>
 
-      <h2>Intuition</h2>
-      <ul>
-        <li>
-        <em>Relation Extraction</em>: Matching appropriate relation type to <b>context</b>.
-        <ul>
-          <li>
-            ("Obama", "USA", Obama was born in Honolulu, Hawaii, USA as he has always said) should not be categorized as President-of, since the context does not match.
-          </li>
-        </ul>
-        </li>
-        <li>
-        <em>True Label Discovery</em>: Finding most reliable annotation w.r.t. <b>context</b>.
-        <ul>
-          <li>
-            A labeling function could be more reliable for a subset of instances comparing to the rest.
-          </li>
-        </ul>
-        </li>
-      </ul>
+      <p align="center"><img width="100%" alt="framework" src="docs/framework.png"/></p>
 
       <p>
-      Since <b>Context</b> plays an important role in both tasks, we employed <b>Representation Learning</b> to capture context information, and bridges these two tasks.
+        As visualized above, we use conditional random field (CRF) to capture labels' dependency, and adopt hierarchical LSTM to take char-level and word-level input. 
+        The char-level structure is further guided by language model, while pre-trained word embedding is leveraged in word-level.
+        Language model and sequence labeling made predictions at word-level, and are trained at the same time.
+        <a href="https://arxiv.org/abs/1507.06228">Highway networks</a> is used to transform output of char-level into different semantic spaces, which mediates these two tasks and allows language model to empower sequence labeling.
       </p>
 
-      <h2>A Representation Learning Approach</h2>
-
-      <img alt="Framework" src="./images/framework.png">
-      
       <h1>Experiments</h1>
+        <p>
+        Here we compare LM-LSTM-CRF with recent sequence labeling models on CoNLL00 Chunking, CoNLL03 NER, and WSJ PTB POS Tagging task. All experiments are conducted on a GTX 1080 GPU.
+        </p>
 
-      <h2>Labeling Function</h2>
-      
-      <ul>
-        <li>
-        Knowledge Base: directly adopting annotations of Distant Supervision.
-        </li>
-        <li>
-        Heuristic Patterns: human constructed by analysis of Annotations generated by KB
-        </li>
-      </ul>
+        <h2>NER</h2>
 
-      <h2>True Label Discovery</h2>
+        When only trained the on the CoNLL03 English NER corpus, the results are summarized below:
 
-      <p>
-      In Table 1, the first two relation mentions come from Wiki-KBP, and their annotations are {born-in, None}. The last two are created by replacing key words of the first two. Key words are marked as bold and entity mentions are marked as Italics.
-      </p>
+        <table align="center">
+        <caption>Table. 1 Performance on CoNLL03 NER task</caption>
+        <tr>
+          <th>Method</th>
+          <th>Max(F1)</th> 
+          <th>Mean(F1)</th>
+          <th>Std(F1)</th>
+          <th>Reported(F1)</th>
+          <th>Time(h)</th>
+        </tr>
+        <tr>
+          <td> <a href="www.aclweb.org/anthology/N16-1030">Lample et al. 2016</a> </td>
+          <td> 91.14 </td>
+          <td> 90.76 </td>
+          <td> 0.08 </td>
+          <td> 90.94 </td>
+          <td> 46 </td>
+        </tr>
+        <tr>   
+          <td> <a href="www.cs.cmu.edu/~xuezhem/publications/P16-1101.pdf">Ma et al. 2016</a> </td>
+          <td> 91.67 </td>
+          <td> 91.37 </td>
+          <td> 0.17 </td>
+          <td> 91.21 </td>
+          <td> 7 </td>
+        </tr>
+        <tr>
+          <td> LM-LSTM-CRF (our) </td>
+          <td>  <b>91.85</b> </td>
+          <td>  <b>91.71</b> </td>
+          <td> 0.10 </td>
+          <td> </td>
+          <td> 6 </td>
+        </tr>
+        </table>
 
-      <table>
-      <caption>Table 1. Context-aware True Label Discovery</caption>
-      <tr>
-        <th>Relation Mention</th>
-        <th>REHESSION</th> 
-        <th><a href="http://cogcomp.org/papers/PasternackRo10.pdf">Investment</a> <br>  \ <a href="http://www.aclweb.org/anthology/N13-1008">Universal</a> <a href="http://www.aclweb.org/anthology/N13-1008">Schemas</a> </th>
-      </tr>
-      <tr>
-        <td> <em>Ann Demeulemeester</em> ( <b>born</b> 1959 , Waregem , <em>Belgium</em> ) is ...</td>
-        <td>Born-in</td>
-        <td>None</td>
-      </tr>
-      <tr>
-        <td><em>Raila Odinga</em> was <b>born</b> at ..., in <em>Maseno</em>, Kisumu District, ...</td>
-        <td>Born-in</td>
-        <td>None</td>
-      </tr>
-      <tr>
-        <td><em>Ann Demeulemeester</em> ( <b>elected</b> 1959 , Waregem , <em>Belgium</em> ) is ...</td>
-        <td>None</td>
-        <td>None</td>
-      </tr>
-      <tr>
-        <td><em>Raila Odinga</em> was <b>examined</b> at ..., in <em>Maseno</em>, Kisumu District, ...</td>
-        <td>None</td>
-        <td>None</td>
-      </tr>
-      </table>
+        <h2>POS</h2>
 
-      <p>
-      Investment and Universal Schemas refer None as true type for all four instances in Table 1. And our method infers born-in as the true label for the first two relation mentions. After replacing the matched contexts (born) with other words (elected and examined), our method no longer trusts born-in since the modified contexts are no longer matched, then infers None as the true label. In other words, our proposed method infer the true label in a context aware manner.
-      </p>
+        When only trained the on WSJ portion of PTB POS Tagging corpus, the results are summarized below:
 
+        <table align="center">
+        <caption>Table. 2 Performance on WSJ-PTB POS-Tagging task</caption>
+        <tr>
+          <th>Method</th>
+          <th>Max(F1)</th> 
+          <th>Mean(F1)</th>
+          <th>Std(F1)</th>
+          <th>Reported(F1)</th>
+          <th>Time(h)</th>
+        </tr>
+        <tr>
+          <td> <a href="www.aclweb.org/anthology/N16-1030">Lample et al. 2016</a> </td>
+          <td> 97.51 </td>
+          <td> 97.35 </td>
+          <td> 0.09 </td>
+          <td> </td>
+          <td> 37 </td>
+        </tr>
+        <tr>   
+          <td> <a href="www.cs.cmu.edu/~xuezhem/publications/P16-1101.pdf">Ma et al. 2016</a> </td>
+          <td> 97.46 </td>
+          <td> 97.42 </td>
+          <td> 0.04 </td>
+          <td> 97.55 </td>
+          <td> 21 </td>
+        </tr>
+        <tr>
+          <td> LM-LSTM-CRF (our) </td>
+          <td> <b>97.59</b> </td>
+          <td> <b>97.53</b> </td>
+          <td> 0.03 </td>
+          <td> </td>
+          <td> 16 </td>
+        </tr>
+        </table>
 
-      <h2>Relation Extraction</h2>
-      Here, we summarize performance comparison with several relation extraction systems over KBP 2013 dataset (sentence-level extraction) in Table. 2.
+        <h2>Chunking</h2>
 
-      <table>
-      <caption>Table. 2 Performance on Wiki-KBP</caption>
-      <tr>
-        <th>Method</th>
-        <th>Precision</th> 
-        <th>Recall</th>
-        <th>F1</th>
-      </tr>
-      <tr>
-        <td>DSL (<a href="http://aclweb.org/anthology/P09-1113">Mintz et al., 2009</a>)</td>
-        <td>0.3301</td> 
-        <td>0.5446</td>
-        <td>0.4067</td>
-      </tr>
-      <tr>
-        <td>MultiR (<a href="http://raphaelhoffmann.com/publications/acl2011.pdf">Hoffmann et al., 2011</a>)</td>
-        <td>0.3045</td>
-        <td>0.5277</td> 
-        <td>0.3810</td>
-      </tr>
-      <tr>
-        <td>FCM (<a href="http://www.aclweb.org/anthology/D15-1205">Gormley et al., 2015</a>)</td>
-        <td>0.2523</td> 
-        <td>0.5258</td>
-        <td>0.3410</td>
-      </tr>
-      <tr>
-        <td>CoType-RM (<a href="https://arxiv.org/pdf/1610.08763.pdf">Ren et al., 2017</a>)</td>
-        <td>0.3701</td> 
-        <td>0.4767</td>
-        <td>0.4122</td>
-      </tr>
-      <tr>
-        <td>ReHession (Our)</td>
-        <td>0.3677</td> 
-        <td>0.4933</td>
-        <td>0.4208</td>
-      </tr>
-      </table>
+        When only trained the on CoNLL00 Chunking corpus, the results are summarized below:
 
-      <h1 id="software">Resources</h1>
-
-      <p>
-      Softwares and labeling functions have been uploaded to 
-      <a href="https://github.com/LiyuanLucasLiu/ReHession">Github</a>
-      </p>
-
+        <table align="center">
+        <caption>Table. 2 Performance on CoNLL00 Chunking task</caption>
+        <tr>
+          <th>Method</th>
+          <th>Max(F1)</th> 
+          <th>Mean(F1)</th>
+          <th>Std(F1)</th>
+          <th>Time(h)</th>
+        </tr>
+        <tr>
+          <td> <a href="www.aclweb.org/anthology/N16-1030">Lample et al. 2016</a> </td>
+          <td> 94.49 </td>
+          <td> 94.37 </td>
+          <td> 0.07 </td>
+          <td> 26 </td>
+        </tr>
+        <tr>   
+          <td> <a href="www.cs.cmu.edu/~xuezhem/publications/P16-1101.pdf">Ma et al. 2016</a> </td>
+          <td> 95.93 </td>
+          <td> 95.80 </td>
+          <td> 0.13 </td>
+          <td> 6 </td>
+        </tr>
+        <tr>
+          <td> LM-LSTM-CRF (our) </td>
+          <td> <b>96.13</b> </td>
+          <td> <b>95.96</b> </td>
+          <td> 0.08 </td>
+          <td> 5 </td>
+        </tr>
+        </table>
 
       <h1 id="Ref">Reference</h1>
 
@@ -280,13 +195,16 @@
       </p>
 
       <p id="reference">
-      @inproceedings{Liu2017rehession, <br>
-      &nbsp title={Heterogeneous Supervision for Relation Extraction: A Representation Learning Approach},<br>
-      &nbsp author={Liu, Liyuan and Ren, Xiang and Zhu, Qi and Zhi, Shi and Gui, Huan and Ji, Heng and Han, Jiawei},<br>
-      &nbsp booktitle={Proc. EMNLP},<br>
-      &nbsp year={2017}<br>
-      }
-      </p>
+      @ARTICLE{2017arXiv170904109L,<br>
+      &nbsp title = "{Empower Sequence Labeling with Task-Aware Neural Language Model}", <br>
+      &nbsp author = {{Liu}, L. and {Shang}, J. and {Xu}, F. and {Ren}, X. and {Gui}, H. and {Peng}, J. and {Han}, J.}, <br>
+      &nbsp journal = {ArXiv e-prints}, <br>
+      &nbsp archivePrefix = "arXiv", <br>
+      &nbsp eprint = {1709.04109}, <br>
+      &nbsp year = 2017, <br>
+      &nbsp month = sep, <br>
+      &nbsp adsurl = {http://adsabs.harvard.edu/abs/2017arXiv170904109L}, <br>
+      }</p>
       </section>
     </div>
 
@@ -298,7 +216,7 @@
           <img src="http://hitwebcounter.com/counter/counter.php?page=6760300&style=0006&nbdigits=8&type=page&initCount=0" title="hit counts" Alt="hit counts" border="0" >
           </a>                                           
         </p>
-        <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
+        <p class="copyright">by <a href="https://github.com/jasoncostello">Slate Theme</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
