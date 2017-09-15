@@ -5,14 +5,21 @@
 
 :github_url: https://github.com/LiyuanLucasLiu/LM-LSTM-CRF
 
-Welcome to LM-LSTM-CRF's documentation!
-=======================================
+LM-LSTM-CRF documentation
+=========================
+This project provides high-performance character-aware sequence labeling tools and tutorials.
+Model details can be accessed at here, and the implementation is based on the PyTorch library.
+
+LM-LSTM-CRF achieves F1 score of 91.71+/-0.10 on CoNLL03 NER task, without using any additional corpus.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Intro
 
-   intro
+
+
+
+
 
 
 
