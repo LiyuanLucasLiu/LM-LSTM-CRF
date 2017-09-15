@@ -22,8 +22,8 @@ The documents would be available soon.
 
 As visualized above, we use conditional random field (CRF) to capture labels' dependency, and adopt hierarchical LSTM to take char-level and word-level input. 
 The char-level structure is further guided by language model, while pre-trained word embedding is leveraged in word-level.
-Language model and sequence labeling made predictions at word-level, and are trained at the same time.
-[Highway networks](https://arxiv.org/abs/1507.06228) is used to transform output of char-level into different semantic spaces, which mediates these two tasks and allows language model to empower sequence labeling.
+Language model and sequence labeling make predictions at word-level, and are trained at the same time.
+[Highway networks]("https://arxiv.org/abs/1507.06228") are used to transform output of char-level into different semantic spaces, which mediate these two tasks and allows language model to empower sequence labeling.
 
 ## Installation
 
@@ -112,7 +112,7 @@ For other datasets or tasks, you may wanna try different stopping parameters, es
 
 ## Benchmarks
 
-Here we compare LM-LSTM-CRF with recent sequence labeling models on CoNLL00 Chunking, CoNLL03 NER, and WSJ PTB POS Tagging task.
+Here we compare LM-LSTM-CRF with recent state-of-the art models on CoNLL00 Chunking, CoNLL03 NER, and WSJ PTB POS Tagging task.
 
 ### NER
 
