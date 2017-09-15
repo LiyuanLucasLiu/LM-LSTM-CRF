@@ -23,8 +23,7 @@ LM-LSTM-CRF achieves F1 score of 91.71+/-0.10 on CoNLL03 NER task, without using
    :maxdepth: 1
    :caption: Package Reference
 
-   model
-   model.crf
+   modules
 
 
 Indices and tables
