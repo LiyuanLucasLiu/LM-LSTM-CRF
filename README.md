@@ -145,7 +145,9 @@ When models are only trained on the CoNLL 2000 Chunking dataset, the results are
 | Ma et al. 2016 | 95.93 | 95.80 | 0.13 | 6|
 | LM-LSTM-CRF | **96.13** | **95.96** | 0.08 | 5 |
 
-### Reference
+
+## Reference
+
 
 @ARTICLE{2017arXiv170904109L,
   title = "{Empower Sequence Labeling with Task-Aware Neural Language Model}", 
