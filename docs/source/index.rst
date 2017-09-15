@@ -20,10 +20,10 @@ LM-LSTM-CRF achieves F1 score of 91.71+/-0.10 on CoNLL03 NER task, without using
    notes/*
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 4
    :caption: Package Reference
 
-   modules
+   model
 
 
 Indices and tables
