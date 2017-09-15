@@ -26,7 +26,7 @@ zip = getattr(itertools, 'izip', zip)
 def to_scalar(var):
     """change the first element of a tensor to scalar
     """
-   return var.view(-1).data.tolist()[0]
+    return var.view(-1).data.tolist()[0]
 
 
 def argmax(vec):
