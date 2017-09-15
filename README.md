@@ -1,6 +1,4 @@
-# LM-LSTM-CRF
-
-[![Documentation Status](https://readthedocs.org/projects/lm-lstm-crf/badge/?version=latest)](http://lm-lstm-crf.readthedocs.io/en/latest/?badge=latest)
+# LM-LSTM-CRF [![Documentation Status](https://readthedocs.org/projects/lm-lstm-crf/badge/?version=latest)](http://lm-lstm-crf.readthedocs.io/en/latest/?badge=latest)
 
 This project provides high-performance character-aware sequence labeling tools and tutorials. Model details can be accessed at [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library.
 
