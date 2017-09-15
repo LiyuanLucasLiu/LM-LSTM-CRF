@@ -148,10 +148,11 @@ When models are only trained on the CoNLL 2000 Chunking dataset, the results are
 
 ## Reference
 
-
+```
 @ARTICLE{2017arXiv170904109L,
   title = "{Empower Sequence Labeling with Task-Aware Neural Language Model}", 
   author = {{Liu}, L. and {Shang}, J. and {Xu}, F. and {Ren}, X. and {Gui}, H. and {Peng}, J. and {Han}, J.}, 
   journal = {	arXiv:1709.04109}, 
   year = 2017, 
 }
+```
