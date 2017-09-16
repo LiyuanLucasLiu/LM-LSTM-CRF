@@ -23,7 +23,7 @@ import functools
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Evaluating LM-BLSTM-CRF')
     parser.add_argument('--load_arg', default='./checkpoint/soa/check_wc_p_char_lstm_crf.json', help='path to arg json')
-    parser.add_argument('--load_check_point', default='./checkpoint/soa/check_wc_p_char_lstm_crf.model',, help='path to model checkpoint file')
+    parser.add_argument('--load_check_point', default='./checkpoint/soa/check_wc_p_char_lstm_crf.model', help='path to model checkpoint file')
     parser.add_argument('--gpu',type=int, default=0, help='gpu id')
     parser.add_argument('--eva_matrix', choices=['a', 'fa'], default='fa', help='use f1 and accuracy or f1 alone')
     args = parser.parse_args()
