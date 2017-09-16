@@ -187,7 +187,7 @@ def generate_corpus(lines, if_shrink_feature=False, thresholds=1):
     label_map = dict()
     for line in lines:
         if not (line.isspace() or (len(line) > 10 and line[0:10] == '-DOCSTART-')):
-            line = line.rstrip('\n').split(' ')
+            line = line.rstrip('\n').split()
             tmp_fl.append(line[0])
             if line[0] not in feature_map:
                 feature_map[line[0]] = len(feature_map) + 1 #0 is for unk
@@ -225,7 +225,7 @@ def read_corpus(lines):
     tmp_ll = list()
     for line in lines:
         if not (line.isspace() or (len(line) > 10 and line[0:10] == '-DOCSTART-')):
-            line = line.rstrip('\n').split(' ')
+            line = line.rstrip('\n').split()
             tmp_fl.append(line[0])
             tmp_ll.append(line[-1])
         elif len(tmp_fl) > 0:
@@ -262,7 +262,7 @@ def encode_corpus(lines, f_map, l_map, if_lower = False):
     labels = []
     for line in lines:
         if not (line.isspace() or (len(line) > 10 and line[0:10] == '-DOCSTART-')):
-            line = line.rstrip('\n').split(' ')
+            line = line.rstrip('\n').split()
             tmp_fl.append(line[0])
             tmp_ll.append(line[-1])
         elif len(tmp_fl) > 0:
@@ -290,7 +290,7 @@ def encode_corpus_c(lines, f_map, l_map, c_map):
     labels = []
     for line in lines:
         if not (line.isspace() or (len(line) > 10 and line[0:10] == '-DOCSTART-')):
-            line = line.rstrip('\n').split(' ')
+            line = line.rstrip('\n').split()
             tmp_fl.append(line[0])
             tmp_ll.append(line[-1])
         elif len(tmp_fl) > 0:
