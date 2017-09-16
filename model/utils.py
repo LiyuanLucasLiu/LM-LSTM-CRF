@@ -388,18 +388,23 @@ def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, casel
             outdoc_embedding_array.append(vector)
     
     embedding_tensor_0 = torch.FloatTensor(np.asarray(indoc_embedding_array))
-    embedding_tensor_1 = torch.FloatTensor(np.asarray(outdoc_embedding_array))
 
-    word_emb_len = embedding_tensor_1.size(1)
-    assert(word_emb_len == emb_len)
+    if not shrink_to_corpus:
+        embedding_tensor_1 = torch.FloatTensor(np.asarray(outdoc_embedding_array))
+        word_emb_len = embedding_tensor_0.size(1)
+        assert(word_emb_len == emb_len)
 
-    embedding_tensor = torch.cat([rand_embedding_tensor, embedding_tensor_0, embedding_tensor_1], 0)
+    if shrink_to_corpus:
+        embedding_tensor = torch.cat([rand_embedding_tensor, embedding_tensor_0], 0)
+    else:
+        embedding_tensor = torch.cat([rand_embedding_tensor, embedding_tensor_0, embedding_tensor_1], 0)
 
     for word in indoc_word_array:
         word_dict[word] = len(word_dict)
     in_doc_num = len(word_dict)
-    for word in outdoc_word_array:
-        word_dict[word] = len(word_dict)
+    if  not shrink_to_corpus:
+        for word in outdoc_word_array:
+            word_dict[word] = len(word_dict)
 
     return word_dict, embedding_tensor, in_doc_num
 
