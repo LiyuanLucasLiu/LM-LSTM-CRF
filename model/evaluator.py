@@ -90,11 +90,11 @@ class eval_batch:
         calculate f1 score based on statics
         """
         if self.guess_count == 0:
-            return 0.0
+            return 0.0, 0.0, 0.0, 0.0
         precision = self.overlap_count / float(self.guess_count)
         recall = self.overlap_count / float(self.gold_count)
         if precision == 0.0 or recall == 0.0:
-            return 0.0
+            return 0.0, 0.0, 0.0, 0.0
         f = 2 * (precision * recall) / (precision + recall)
         accuracy = float(self.correct_labels) / self.total_labels
         return f, precision, recall, accuracy
