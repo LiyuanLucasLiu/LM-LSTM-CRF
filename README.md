@@ -134,7 +134,7 @@ When models are only trained on the WSJ portion of the PTB POS Tagging dataset, 
 
 |Model | Max(Acc) | Mean(Acc) | Std(Acc) | Reported(Acc) | Time(h) |
 | ------------- |-------------| -----| -----| -----| ---- |
-| [Lample et al. 2016](https://github.com/glample/tagger) | 97.51 | 97.35 | 0.09 | | 37 |
+| [Lample et al. 2016](https://github.com/glample/tagger) | 97.51 | 97.35 | 0.09 | N/A | 37 |
 | [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 97.46 | 97.42 | 0.04 | 97.55 | 21 |
 | LM-LSTM-CRF | **97.59** | **97.53** | 0.03 | | 16 |
 
