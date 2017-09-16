@@ -307,7 +307,7 @@ def encode_corpus_c(lines, f_map, l_map, c_map):
     label_e = encode(labels, l_map)
     return feature_c, feature_e, label_e
 
-def load_embedding(emb_file, delimiter, feature_map, caseless, unk, shrink=False):
+def load_embedding(emb_file, delimiter, feature_map, caseless, unk, shrink_to_train=False):
     """
     load embedding
     """
@@ -321,7 +321,7 @@ def load_embedding(emb_file, delimiter, feature_map, caseless, unk, shrink=False
     for line in open(emb_file, 'r'):
         line = line.split(delimiter)
         vector = list(map(lambda t: float(t), filter(lambda n: n and not n.isspace(), line[1:])))
-        if shrink and line[0] not in feature_set:
+        if shrink_to_train and line[0] not in feature_set:
             continue
         if line[0] == unk:
             word_dict['<unk>'] = len(word_dict)
@@ -345,7 +345,7 @@ def load_embedding(emb_file, delimiter, feature_map, caseless, unk, shrink=False
     embedding_tensor = torch.cat((embedding_tensor_1, rand_embedding_tensor), 0)
     return word_dict, embedding_tensor
 
-def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, caseless, unk, emb_len, shrink=False):
+def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, caseless, unk, emb_len, shrink_to_train=False, shrink_to_corpus=False):
     """
     load embedding, indoc words would be listed before outdoc words
     """
@@ -373,7 +373,7 @@ def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, casel
         line = line.split(delimiter)
         vector = list(map(lambda t: float(t), filter(lambda n: n and not n.isspace(), line[1:])))
 
-        if shrink and line[0] not in feature_set:
+        if shrink_to_train and line[0] not in feature_set:
             continue
 
         if line[0] == unk:
@@ -383,7 +383,7 @@ def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, casel
         elif line[0] in full_feature_set:
             indoc_embedding_array.append(vector)
             indoc_word_array.append(line[0])
-        else:
+        elif not shrink_to_corpus:
             outdoc_word_array.append(line[0])
             outdoc_embedding_array.append(vector)
     

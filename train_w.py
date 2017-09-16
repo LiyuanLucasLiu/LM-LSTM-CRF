@@ -50,6 +50,7 @@ if __name__ == "__main__":
     parser.add_argument('--eva_matrix', choices=['a', 'fa'], default='fa', help='use f1 and accuracy or accuracy alone')
     parser.add_argument('--patience', type=int, default=15, help='patience for early stop')
     parser.add_argument('--least_iters', type=int, default=50, help='at least train how many epochs before stop')
+    parser.add_argument('--shrink_embedding', action='store_true', help='shrink the embedding dictionary to corpus (open this if pre-trained embedding dictionary is too large, but disable this may yield better results on external corpus)')
     args = parser.parse_args()
 
     if args.gpu >= 0:
@@ -92,13 +93,14 @@ if __name__ == "__main__":
         f_map = utils.shrink_features(f_map, train_features, args.mini_count)
 
         dt_f_set = functools.reduce(lambda x, y: x | y, map(lambda t: set(t), dev_features), f_set)
+        dt_f_set = functools.reduce(lambda x, y: x | y, map(lambda t: set(t), test_features), dt_f_set)
 
         if not args.rand_embedding:
             print("feature size: '{}'".format(len(f_map)))
             print('loading embedding')
             if args.fine_tune:  # which means does not do fine-tune
                 f_map = {'<eof>': 0}
-            f_map, embedding_tensor, in_doc_words = utils.load_embedding_wlm(args.emb_file, ' ', f_map, dt_f_set, args.caseless, args.unk, args.embedding_dim)
+            f_map, embedding_tensor, in_doc_words = utils.load_embedding_wlm(args.emb_file, ' ', f_map, dt_f_set,args.caseless,args.unk, args.embedding_dim, shrink_to_corpus=args.shrink_embedding)
             print("embedding size: '{}'".format(len(f_map)))
 
         l_set = functools.reduce(lambda x, y: x | y, map(lambda t: set(t), dev_labels))
