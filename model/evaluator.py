@@ -103,6 +103,8 @@ class eval_batch:
         """
         calculate accuracy score based on statics
         """
+        if 0 == self.total_labels:
+            return 0.0
         accuracy = float(self.correct_labels) / self.total_labels
         return accuracy        
 
