@@ -357,8 +357,8 @@ def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, casel
         caseless: convert into casesless style
         unk: string for unknown token
         emb_len: dimension of embedding vectors
-        shrink: whether to shrink out-of-training set or not
-        shrink: whether to shrink out-of-corpus or not
+        shrink_to_train: whether to shrink out-of-training set or not
+        shrink_to_corpus: whether to shrink out-of-corpus or not
     """
     if caseless:
         feature_set = set([key.lower() for key in feature_map])
