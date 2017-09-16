@@ -121,8 +121,8 @@ When models are only trained on the CoNLL 2003 English NER dataset, the results 
 
 |Model | Max(F1) | Mean(F1) | Std(F1) | Reported(F1) | Time(h) |
 | ------------- |-------------| -----| -----| -----| ---- |
-| Lample et al. 2016 | 91.14 | 90.76 | 0.08 | 90.94 | 46 |
-| Ma et al. 2016 | 91.67 | 91.37 | 0.17 | 91.21 | 7 |
+| [Lample et al. 2016](https://github.com/glample/tagger) | 91.14 | 90.76 | 0.08 | 90.94 | 46 |
+| [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 91.67 | 91.37 | 0.17 | 91.21 | 7 |
 | LM-LSTM-CRF | **91.85** | **91.71** | 0.10 | | 6 |
 
 ### POS
@@ -131,8 +131,8 @@ When models are only trained on the WSJ portion of the PTB POS Tagging dataset, 
 
 |Model | Max(Acc) | Mean(Acc) | Std(Acc) | Reported(Acc) | Time(h) |
 | ------------- |-------------| -----| -----| -----| ---- |
-| Lample et al. 2016 | 97.51 | 97.35 | 0.09 | | 37 |
-| Ma et al. 2016 | 97.46 | 97.42 | 0.04 | 97.55 | 21 |
+| [Lample et al. 2016](https://github.com/glample/tagger) | 97.51 | 97.35 | 0.09 | | 37 |
+| [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 97.46 | 97.42 | 0.04 | 97.55 | 21 |
 | LM-LSTM-CRF | **97.59** | **97.53** | 0.03 | | 16 |
 
 ### Chunking
@@ -141,8 +141,8 @@ When models are only trained on the CoNLL 2000 Chunking dataset, the results are
 
 |Model | Max(F1) | Mean(F1) | Std(F1) | Time(h) |
 | ------------- |-------------| -----| -----| ----|
-| Lample et al. 2016 | 94.49 | 94.37 | 0.07 | 26 |
-| Ma et al. 2016 | 95.93 | 95.80 | 0.13 | 6|
+| [Lample et al. 2016](https://github.com/glample/tagger) | 94.49 | 94.37 | 0.07 | 26 |
+| [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 95.93 | 95.80 | 0.13 | 6|
 | LM-LSTM-CRF | **96.13** | **95.96** | 0.08 | 5 |
 
 
