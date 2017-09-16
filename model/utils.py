@@ -348,6 +348,17 @@ def load_embedding(emb_file, delimiter, feature_map, caseless, unk, shrink_to_tr
 def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, caseless, unk, emb_len, shrink_to_train=False, shrink_to_corpus=False):
     """
     load embedding, indoc words would be listed before outdoc words
+
+    args: 
+        emb_file: path to embedding file
+        delimiter: delimiter of lines
+        feature_map: word dictionary
+        full_feature_set: all words in the corpus
+        caseless: convert into casesless style
+        unk: string for unknown token
+        emb_len: dimension of embedding vectors
+        shrink: whether to shrink out-of-training set or not
+        shrink: whether to shrink out-of-corpus or not
     """
     if caseless:
         feature_set = set([key.lower() for key in feature_map])
