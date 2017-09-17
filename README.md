@@ -16,6 +16,7 @@ The documents would be available [here](http://lm-lstm-crf.readthedocs.io/en/lat
 - [Data](#data)
 - [Usage](#usage)
 - [Benchmarks](#benchmarks)
+- [Pretrained model](#pretrained-model)
 
 ## Model Notes
 
@@ -148,6 +149,21 @@ When models are only trained on the CoNLL 2000 Chunking dataset, the results are
 | [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 95.93 | 95.80 | 0.13 | 6|
 | LM-LSTM-CRF | **96.13** | **95.96** | 0.08 | 5 |
 
+
+## Pretrained Model
+
+We released pre-trained model on these three tasks. The checkpoint file can be downloaded at:
+
+ 
+| CoNLL03 NER | WSJ-PTB POS Tagging | CoNLL00 Chunking|
+| ------------ | -------------------| -----------------|
+| [Args](https://drive.google.com/file/d/0B587SdKqutQmN1UwNjhHQkhUWEk/view?usp=sharing) | [Args](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmN1UwNjhHQkhUWEk/view?usp=sharing) | [Args](https://drive.google.com/file/d/0B587SdKqutQmYmpiNFp6b1hKWEE/view?usp=sharing) |
+| [Model](https://drive.google.com/file/d/0B587SdKqutQmSDlJRGRNandhMGs/view?usp=sharing) | [Model](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmSDlJRGRNandhMGs/view?usp=sharing) | [Model](https://drive.google.com/file/d/0B587SdKqutQmNnR3Nnk1WHdIMG8/view?usp=sharing) |
+
+Also, ```eval_wc.py``` is provided to load and run these checkpoints. Its usage can be accessed by command ````python eval_wc.py -h````, and a running command example is provided below:
+```
+python eval_wc.py --load_arg checkpoint/ner/ner_4_cwlm_lstm_crf.json --load_check_point checkpoint/ner_ner_4_cwlm_lstm_crf.model --gpu 0 --dev_file ./data/ner/testa.txt --test_file ./data/ner/testb.txt
+```
 
 ## Reference
 
