@@ -70,15 +70,15 @@ class CRF_S(nn.Module):
         args: 
             feats (batch_size, seq_len, hidden_dim) : input score from previous layers
         return:
-            output from crf layer (batch_size, seq_len, tag_size, tag_size)
+            output from crf layer ( (batch_size * seq_len), tag_size, tag_size)
         """
         
-        ins_num = feats.size(0)
-        scores = self.hidden2tag(feats)
-        crf_scores = scores.view(-1, self.tagset_size, 1).expand(ins_num, self.tagset_size, self.tagset_size) + self.transitions.view(1, self.tagset_size, self.tagset_size).expand(ins_num, self.tagset_size, self.tagset_size)
+        scores = self.hidden2tag(feats).view(-1, self.tagset_size, 1)
+        ins_num = scores.size(0)
+        crf_scores = scores.expand(ins_num, self.tagset_size, self.tagset_size) + self.transitions.view(1, self.tagset_size, self.tagset_size).expand(ins_num, self.tagset_size, self.tagset_size)
 
         return crf_scores
-
+        
 class CRFRepack:
     """Packer for word level model
     
