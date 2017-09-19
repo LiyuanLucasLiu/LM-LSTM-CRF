@@ -152,6 +152,7 @@ When models are only trained on the CoNLL 2000 Chunking dataset, the results are
 
 ## Pretrained Model
 
+### Evaluation
 We released pre-trained model on these three tasks. The checkpoint file can be downloaded at:
 
  
@@ -163,6 +164,44 @@ We released pre-trained model on these three tasks. The checkpoint file can be d
 Also, ```eval_wc.py``` is provided to load and run these checkpoints. Its usage can be accessed by command ````python eval_wc.py -h````, and a running command example is provided below:
 ```
 python eval_wc.py --load_arg checkpoint/ner/ner_4_cwlm_lstm_crf.json --load_check_point checkpoint/ner_ner_4_cwlm_lstm_crf.model --gpu 0 --dev_file ./data/ner/testa.txt --test_file ./data/ner/testb.txt
+```
+### Prediction
+
+To annotated raw text, ```seq_wc.py``` is provided to annotate un-annotated text. Its usage can be accessed by command ````python seq_wc.py -h````, and a running command example is provided below:
+```
+python seq_wc.py --load_arg checkpoint/ner/ner_4_cwlm_lstm_crf.json --load_check_point checkpoint/ner_ner_4_cwlm_lstm_crf.model --gpu 0 --input_file ./data/ner2003/test.txt --output_file output.txt
+```
+
+The input format is similar to CoNLL, but each line is required to only contain one field, token. For example, an input file could be:
+
+```
+-DOCSTART-
+
+But
+China
+saw
+their
+luck
+desert
+them
+in
+the
+second
+match
+of
+the
+group
+,
+crashing
+to
+a
+surprise
+2-0
+defeat
+to
+newcomers
+Uzbekistan
+.
 ```
 
 ## Reference
