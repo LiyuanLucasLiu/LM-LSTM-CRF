@@ -9,6 +9,8 @@ import torch
 import torch.autograd as autograd
 import numpy as np
 import itertools
+import sys
+from tqdm import tqdm
 
 from model.crf import CRFDecode_vb
 from model.utils import *
@@ -123,7 +125,8 @@ class predict:
         """
         f_len = len(features)
 
-        for ind in range(0, f_len, self.batch_size):
+        for ind in tqdm( range(0, f_len, self.batch_size), mininterval=1,
+                desc=' - Process', leave=False, file=sys.stdout):
             eind = min(f_len, ind + self.batch_size)
             labels = self.apply_model(ner_model, features[ind: eind])
             labels = torch.unbind(labels, 1)

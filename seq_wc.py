@@ -30,6 +30,7 @@ if __name__ == "__main__":
     parser.add_argument('--output_file', default='output.txt', help='path to output file')
     args = parser.parse_args()
 
+    print('loading dictionary')
     with open(args.load_arg, 'r') as f:
         jd = json.load(f)
     jd = jd['args']
@@ -42,15 +43,16 @@ if __name__ == "__main__":
     if args.gpu >= 0:
         torch.cuda.set_device(args.gpu)
 
-    # load corpus
+    # loading corpus
+    print('loading corpus')
     with codecs.open(args.input_file, 'r', 'utf-8') as f:
         lines = f.readlines()
 
     # converting format
-
     features = utils.read_features(lines)
 
     # build model
+    print('loading model')
     ner_model = LM_LSTM_CRF(len(l_map), len(c_map), jd['char_dim'], jd['char_hidden'], jd['char_layers'], jd['word_dim'], jd['word_hidden'], jd['word_layers'], len(f_map), jd['drop_out'], large_CRF=jd['small_crf'], if_highway=jd['high_way'], in_doc_words=in_doc_words, highway_layers = jd['highway_layers'])
 
     ner_model.load_state_dict(checkpoint_file['state_dict'])
@@ -67,5 +69,6 @@ if __name__ == "__main__":
     decode_label = (args.decode_type == 'label')
     predictor = predict_wc(if_cuda, f_map, c_map, l_map, f_map['<eof>'], c_map['\n'], l_map['<pad>'], l_map['<start>'], decode_label, args.batch_size, jd['caseless'])
 
+    print('annotating')
     with open(args.output_file, 'w') as fout:
         predictor.output_batch(ner_model, features, fout)
