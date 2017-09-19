@@ -239,6 +239,23 @@ def read_corpus(lines):
 
     return features, labels
 
+def read_features(lines):
+    """
+    convert un-annotated corpus into features
+    """
+    features = list()
+    tmp_fl = list()
+    for line in lines:
+        if not (line.isspace() or (len(line) > 10 and line[0:10] == '-DOCSTART-')):
+            line = line.rstrip()
+            tmp_fl.append(line)
+        elif len(tmp_fl) > 0:
+            features.append(tmp_fl)
+            tmp_fl = list()
+    if len(tmp_fl) > 0:
+        features.append(tmp_fl)
+ 
+    return features
 
 def shrink_embedding(feature_map, word_dict, word_embedding, caseless):
     """
@@ -516,10 +533,9 @@ def construct_bucket_vb_wc(word_features, forw_features, fea_len, input_labels, 
 
         padded_feature = f_f + [pad_char_feature] * (buckets_len[idx] - len(f_f))  # pad feature with <'\n'>, at least one
 
-        padded_feature_len = f_l + [1] * (thresholds[idx] - len(f_l))  # pad feature length with <'\n'>, at least one
-        padded_feature_len_cum = [tup for tup in itertools.accumulate(
-            padded_feature_len)]  # start from 0, but the first is ' ', so the position need not to be -1
-        buckets[idx][0].append(padded_feature)#char
+        padded_feature_len = f_l + [1] * (thresholds[idx] - len(f_l)) # pad feature length with <'\n'>, at least one
+        padded_feature_len_cum = list(itertools.accumulate(padded_feature_len)) # start from 0, but the first is ' ', so the position need not to be -1
+        buckets[idx][0].append(padded_feature) # char
         buckets[idx][1].append(padded_feature_len_cum)
         buckets[idx][2].append(padded_feature[::-1])
         buckets[idx][3].append([buckets_len[idx] - 1] + [buckets_len[idx] - 1 - tup for tup in padded_feature_len_cum[:-1]])
@@ -569,8 +585,7 @@ def construct_bucket_gd(input_features, input_labels, thresholds, pad_feature, p
         buckets[idx][0].append(feature + [pad_feature] * (thresholds[idx] - cur_len))
         buckets[idx][1].append(label[1:] + [pad_label] * (thresholds[idx] - cur_len))
         buckets[idx][2].append(label + [pad_label] * (thresholds[idx] - cur_len_1))
-    bucket_dataset = [CRFDataset(torch.LongTensor(bucket[0]), torch.LongTensor(bucket[1]), torch.LongTensor(bucket[2]))
-                      for bucket in buckets]
+    bucket_dataset = [CRFDataset(torch.LongTensor(bucket[0]), torch.LongTensor(bucket[1]), torch.LongTensor(bucket[2])) for bucket in buckets]
     return bucket_dataset
 
 
