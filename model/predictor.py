@@ -114,7 +114,7 @@ class predict:
 
         return chunks
 
-    def output_batch(self, ner_model, features, fout):
+    def output_batch(self, ner_model, documents, fout):
         """
         decode the whole corpus in the specific format by calling apply_model to fit specific models
 
@@ -123,18 +123,22 @@ class predict:
             feature (list): list of words list
             fout: output file
         """
-        f_len = len(features)
+        d_len = len(documents)
 
-        for ind in tqdm( range(0, f_len, self.batch_size), mininterval=1,
+        for d_ind in tqdm( range(0, d_len), mininterval=1,
                 desc=' - Process', leave=False, file=sys.stdout):
-            eind = min(f_len, ind + self.batch_size)
-            labels = self.apply_model(ner_model, features[ind: eind])
-            labels = torch.unbind(labels, 1)
+            fout.write('-DOCSTART- -DOCSTART- -DOCSTART-\n\n')
+            features = documents[d_ind]
+            f_len = len(features)
+            for ind in range(0, f_len, self.batch_size):
+                eind = min(f_len, ind + self.batch_size)
+                labels = self.apply_model(ner_model, features[ind: eind])
+                labels = torch.unbind(labels, 1)
 
-            for ind2 in range(ind, eind):
-                f = features[ind2]
-                l = labels[ind2 - ind][0: len(f) ]
-                fout.write(self.decode_str(features[ind2], l) + '\n\n')
+                for ind2 in range(ind, eind):
+                    f = features[ind2]
+                    l = labels[ind2 - ind][0: len(f) ]
+                    fout.write(self.decode_str(features[ind2], l) + '\n\n')
 
     def apply_model(self, ner_model, features):
         """

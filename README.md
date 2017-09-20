@@ -3,9 +3,9 @@
 [![Documentation Status](https://readthedocs.org/projects/lm-lstm-crf/badge/?version=latest)](http://lm-lstm-crf.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This project provides high-performance character-aware sequence labeling tools and tutorials. Model details can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library.
+This project provides high-performance character-aware sequence labeling tools, including [Training](#usage), [Evaluation](#evaluation) and [Prediction](#prediction). 
 
-LM-LSTM-CRF achieves F1 score of 91.71+/-0.10 on the CoNLL 2003 NER dataset, without using any additional corpus or resource.
+Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. Our model achieves F1 score of 91.71+/-0.10 on the CoNLL 2003 NER dataset, without using any additional corpus or resource.
 
 The documents would be available [here](http://lm-lstm-crf.readthedocs.io/en/latest/).
 
@@ -202,6 +202,14 @@ to
 newcomers
 Uzbekistan
 .
+```
+and the corresponding output is:
+
+```
+-DOCSTART- -DOCSTART- -DOCSTART-
+
+But <LOC> China </LOC> saw their luck desert them in the second match of the group , crashing to a surprise 2-0 defeat to newcomers <LOC> Uzbekistan </LOC> . 
+
 ```
 
 ## Reference
