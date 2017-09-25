@@ -139,7 +139,7 @@ def generate_corpus_char(lines, if_shrink_c_feature=False, c_thresholds=1, if_sh
         for word in feature:
             for tup in word:
                 if tup not in char_count:
-                    char_count[tup] = len(char_count)
+                    char_count[tup] = 0
                 else:
                     char_count[tup] += 1
     if if_shrink_c_feature:
