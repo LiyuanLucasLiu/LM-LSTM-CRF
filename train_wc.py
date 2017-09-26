@@ -102,10 +102,12 @@ if __name__ == "__main__":
         f_set = {v for v in f_map}
         f_map = utils.shrink_features(f_map, train_features, args.mini_count)
 
-        dt_f_set = functools.reduce(lambda x, y: x | y, map(lambda t: set(t), dev_features), f_set)
-        dt_f_set = functools.reduce(lambda x, y: x | y, map(lambda t: set(t), test_features), dt_f_set)
-
-        if not args.rand_embedding:
+        if args.rand_embedding:
+            print("embedding size: '{}'".format(len(f_map)))
+            in_doc_words = len(f_map)
+        else:
+            dt_f_set = functools.reduce(lambda x, y: x | y, map(lambda t: set(t), dev_features), f_set)
+            dt_f_set = functools.reduce(lambda x, y: x | y, map(lambda t: set(t), test_features), dt_f_set)
             print("feature size: '{}'".format(len(f_map)))
             print('loading embedding')
             if args.fine_tune:  # which means does not do fine-tune
