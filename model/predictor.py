@@ -123,8 +123,9 @@ class predict:
             feature (list): list of words list
             fout: output file
         """
-        d_len = len(documents)
+        ner_model.eval()
 
+        d_len = len(documents)
         for d_ind in tqdm( range(0, d_len), mininterval=1,
                 desc=' - Process', leave=False, file=sys.stdout):
             fout.write('-DOCSTART- -DOCSTART- -DOCSTART-\n\n')
