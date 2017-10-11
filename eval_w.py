@@ -34,7 +34,7 @@ if __name__ == "__main__":
         jd = json.load(f)
     jd = jd['args']
 
-    checkpoint_file = torch.load(args.load_check_point)
+    checkpoint_file = torch.load(args.load_check_point, map_location=lambda storage, loc: storage)
     f_map = checkpoint_file['f_map']
     l_map = checkpoint_file['l_map']
     if args.gpu >= 0:

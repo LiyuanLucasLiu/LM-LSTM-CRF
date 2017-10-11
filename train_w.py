@@ -228,7 +228,7 @@ if __name__ == "__main__":
                         'l_map': l_map,
                     }, {'track_list': track_list,
                         'args': vars(args)
-                        }, args.checkpoint + 'cwlm_lstm_crf')
+                        }, args.checkpoint + 'lstm_crf')
                 except Exception as inst:
                     print(inst)
 
@@ -270,7 +270,7 @@ if __name__ == "__main__":
                         'l_map': l_map,
                     }, {'track_list': track_list,
                         'args': vars(args)
-                        }, args.checkpoint + 'cwlm_lstm_crf')
+                        }, args.checkpoint + 'lstm_crf')
                 except Exception as inst:
                     print(inst)
 
