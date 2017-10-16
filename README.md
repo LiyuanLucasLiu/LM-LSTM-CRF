@@ -2,6 +2,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/lm-lstm-crf/badge/?version=latest)](http://lm-lstm-crf.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Insight.io](https://insight.io/repoBadge/github.com/LiyuanLucasLiu/LM-LSTM-CRF)](https://insight.io/github.com/LiyuanLucasLiu/LM-LSTM-CRF)
 
 This project provides high-performance character-aware sequence labeling tools, including [Training](#usage), [Evaluation](#evaluation) and [Prediction](#prediction). 
 
