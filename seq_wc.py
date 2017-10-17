@@ -57,6 +57,13 @@ if __name__ == "__main__":
 
     ner_model.load_state_dict(checkpoint_file['state_dict'])
 
+    if args.gpu >= 0:
+        if_cuda = True
+        torch.cuda.set_device(args.gpu)
+        ner_model.cuda()
+    else:
+        if_cuda = False
+
     decode_label = (args.decode_type == 'label')
     predictor = predict_wc(if_cuda, f_map, c_map, l_map, f_map['<eof>'], c_map['\n'], l_map['<pad>'], l_map['<start>'], decode_label, args.batch_size, jd['caseless'])
 
