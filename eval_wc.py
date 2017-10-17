@@ -86,6 +86,7 @@ if __name__ == "__main__":
 
     evaluator = eval_wc(packer, l_map, args.eva_matrix)
 
+    print('start')
     if 'f' in args.eva_matrix:
 
         dev_f1, dev_pre, dev_rec, dev_acc = evaluator.calc_score(ner_model, dev_dataset_loader)
@@ -101,3 +102,4 @@ if __name__ == "__main__":
         test_acc = evaluator.calc_score(ner_model, test_dataset_loader)
 
         print(jd['checkpoint'] + ' dev_acc: %.4f test_acc: %.4f\n' % (dev_acc, test_acc))
+    print('end')

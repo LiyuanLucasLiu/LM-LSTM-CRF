@@ -250,7 +250,7 @@ def read_features(lines, multi_docs = True):
         for line in lines:
             if_doc_end = (len(line) > 10 and line[0:10] == '-DOCSTART-')
             if not (line.isspace() or if_doc_end):
-                line = line.rstrip()
+                line = line.split()[0]
                 tmp_fl.append(line)
             else:
                 if len(tmp_fl) > 0:
@@ -269,7 +269,7 @@ def read_features(lines, multi_docs = True):
         tmp_fl = list()
         for line in lines:
             if not (line.isspace() or (len(line) > 10 and line[0:10] == '-DOCSTART-')):
-                line = line.rstrip()
+                line = line.split()[0]
                 tmp_fl.append(line)
             elif len(tmp_fl) > 0:
                 features.append(tmp_fl)
