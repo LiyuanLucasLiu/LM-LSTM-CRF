@@ -192,7 +192,7 @@ class CRFRepack_WC:
             b_p = autograd.Variable((b_p[:, 0:mlen[1]] - ocl + mlen[0]).transpose(0, 1))
             w_f = autograd.Variable(w_f[:, 0:mlen[1]].transpose(0, 1))
             tg_v = autograd.Variable(target[:, 0:mlen[1]].transpose(0, 1)).unsqueeze(2)
-            mask_v = autograd.Variable(mask[:, 0:mlen[1]].transpose(0, 1))
+            mask_v = autograd.Variable(mask[:, 0:mlen[1]].transpose(0, 1)).contiguous()
         return f_f, f_p, b_f, b_p, w_f, tg_v, mask_v
 
     def convert_for_eval(self, target):
