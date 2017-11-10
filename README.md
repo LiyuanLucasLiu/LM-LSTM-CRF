@@ -215,10 +215,10 @@ But <LOC> China </LOC> saw their luck desert them in the second match of the gro
 ## Reference
 
 ```
-@ARTICLE{2017arXiv170904109L,
+@inproceedings{2017arXiv170904109L,
   title = "{Empower Sequence Labeling with Task-Aware Neural Language Model}", 
   author = {{Liu}, L. and {Shang}, J. and {Xu}, F. and {Ren}, X. and {Gui}, H. and {Peng}, J. and {Han}, J.}, 
-  journal = {	arXiv:1709.04109}, 
+  booktitle={AAAI},
   year = 2017, 
 }
 ```
