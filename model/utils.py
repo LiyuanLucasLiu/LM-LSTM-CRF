@@ -702,7 +702,7 @@ def iobes_to_spans(sequence, lut, strict_iob2=False):
                 chunks.append('@'.join(current))
             current = [label.replace('B-', ''), '%d' % i]
 
-        if label.startswith('S-'):
+        elif label.startswith('S-'):
 
             if current is not None:
                 chunks.append('@'.join(current))
