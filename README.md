@@ -6,7 +6,7 @@
 
 This project provides high-performance character-aware sequence labeling tools, including [Training](#usage), [Evaluation](#evaluation) and [Prediction](#prediction). 
 
-Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. Our model achieves F1 score of 91.71+/-0.10 on the CoNLL 2003 NER dataset, without using any additional corpus or resource.
+Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. 
 
 The documents would be available [here](http://lm-lstm-crf.readthedocs.io/en/latest/).
 
@@ -120,15 +120,7 @@ For other datasets or tasks, you may wanna try different stopping parameters, es
 
 Here we compare LM-LSTM-CRF with recent state-of-the-art models on the CoNLL 2000 Chunking dataset, the CoNLL 2003 NER dataset, and the WSJ portion of the PTB POS Tagging dataset. All experiments are conducted on a GTX 1080 GPU.
 
-### NER
-
-When models are only trained on the CoNLL 2003 English NER dataset, the results are summarized as below.
-
-|Model | Max(F1) | Mean(F1) | Std(F1) | Reported(F1) | Time(h) |
-| ------------- |-------------| -----| -----| -----| ---- |
-| [Lample et al. 2016](https://github.com/glample/tagger) | 91.14 | 90.76 | 0.08 | 90.94 | 46 |
-| [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 91.67 | 91.37 | 0.17 | 91.21 | 7 |
-| LM-LSTM-CRF | **91.85** | **91.71** | 0.10 | | 6 |
+A serious bug was found on the ```bioes_to_span``` function, we are doing experiments and would update the results on NER & Chunking later.
 
 ### POS
 
@@ -140,27 +132,16 @@ When models are only trained on the WSJ portion of the PTB POS Tagging dataset, 
 | [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 97.46 | 97.42 | 0.04 | 97.55 | 21 |
 | LM-LSTM-CRF | **97.59** | **97.53** | 0.03 | | 16 |
 
-### Chunking
-
-When models are only trained on the CoNLL 2000 Chunking dataset, the results are summarized as below.
-
-|Model | Max(F1) | Mean(F1) | Std(F1) | Time(h) |
-| ------------- |-------------| -----| -----| ----|
-| [Lample et al. 2016](https://github.com/glample/tagger) | 94.49 | 94.37 | 0.07 | 26 |
-| [Ma et al. 2016](https://github.com/XuezheMax/LasagneNLP) | 95.93 | 95.80 | 0.13 | 6|
-| LM-LSTM-CRF | **96.13** | **95.96** | 0.08 | 5 |
-
-
 ## Pretrained Model
 
 ### Evaluation
 We released pre-trained model on these three tasks. The checkpoint file can be downloaded at:
 
- 
-| CoNLL03 NER | WSJ-PTB POS Tagging | CoNLL00 Chunking|
-| ------------ | -------------------| -----------------|
-| [Args](https://drive.google.com/file/d/0B587SdKqutQmN1UwNjhHQkhUWEk/view?usp=sharing) | [Args](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmN1UwNjhHQkhUWEk/view?usp=sharing) | [Args](https://drive.google.com/file/d/0B587SdKqutQmYmpiNFp6b1hKWEE/view?usp=sharing) |
-| [Model](https://drive.google.com/file/d/0B587SdKqutQmSDlJRGRNandhMGs/view?usp=sharing) | [Model](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmSDlJRGRNandhMGs/view?usp=sharing) | [Model](https://drive.google.com/file/d/0B587SdKqutQmNnR3Nnk1WHdIMG8/view?usp=sharing) |
+| WSJ-PTB POS Tagging |
+| ------------------- |
+| [Args](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmN1UwNjhHQkhUWEk/view?usp=sharing) |
+| [Model](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmSDlJRGRNandhMGs/view?usp=sharing) |
+
 
 Also, ```eval_wc.py``` is provided to load and run these checkpoints. Its usage can be accessed by command ````python eval_wc.py -h````, and a running command example is provided below:
 ```
