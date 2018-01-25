@@ -203,7 +203,8 @@ if __name__ == "__main__":
         epoch_loss /= tot_length
 
         # update lr
-        utils.adjust_learning_rate(optimizer, args.lr / (1 + (args.start_epoch + 1) * args.lr_decay))
+        if args.update == 'sgd':
+            utils.adjust_learning_rate(optimizer, args.lr / (1 + (args.start_epoch + 1) * args.lr_decay))
 
         # eval & save check_point
 
