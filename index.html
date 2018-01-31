@@ -69,7 +69,7 @@
 
       <h1>Experiments</h1>
         <p>
-        Here we compare LM-LSTM-CRF with recent state-of-the-art models on the CoNLL 2000 Chunking dataset, the CoNLL 2003 NER dataset, and the WSJ portion of the PTB POS Tagging dataset. All experiments are conducted on a GTX 1080 GPU.
+        Here we compare LM-LSTM-CRF with recent state-of-the-art models on the CoNLL 2003 NER dataset, and the WSJ portion of the PTB POS Tagging dataset. All experiments are conducted on a GTX 1080 GPU.
         </p>
 
         <h2>NER</h2>
@@ -83,32 +83,28 @@
           <th>Max(F1)</th> 
           <th>Mean(F1)</th>
           <th>Std(F1)</th>
-          <th>Reported(F1)</th>
           <th>Time(h)</th>
         </tr>
         <tr>
-          <td> <a href="www.aclweb.org/anthology/N16-1030">Lample et al. 2016</a> </td>
-          <td> 91.14 </td>
-          <td> 90.76 </td>
-          <td> 0.08 </td>
-          <td> 90.94 </td>
-          <td> 46 </td>
-        </tr>
-        <tr>   
-          <td> <a href="www.cs.cmu.edu/~xuezhem/publications/P16-1101.pdf">Ma et al. 2016</a> </td>
-          <td> 91.67 </td>
-          <td> 91.37 </td>
-          <td> 0.17 </td>
-          <td> 91.21 </td>
-          <td> 7 </td>
+          <td> LM-LSTM-CRF (our) </td>
+          <td>  <b>91.35</b> </td>
+          <td>  <b>91.24</b> </td>
+          <td> 0.12 </td>
+          <td> 4 </td>
         </tr>
         <tr>
-          <td> LM-LSTM-CRF (our) </td>
-          <td>  <b>91.85</b> </td>
-          <td>  <b>91.71</b> </td>
-          <td> 0.10 </td>
-          <td> </td>
-          <td> 6 </td>
+          <td> -- HighWay </td>
+          <td>  90.87 </td>
+          <td>  90.79 </td>
+          <td> 0.07 </td>
+          <td> 4 </td>
+        </tr>
+        <tr>
+          <td> -- Co-Train </td>
+          <td>  91.23 </td>
+          <td>  90.95 </td>
+          <td> 0.34 </td>
+          <td> 2 </td>
         </tr>
         </table>
 
@@ -152,41 +148,6 @@
         </tr>
         </table>
 
-        <h2>Chunking</h2>
-
-        When models are only trained on the CoNLL 2000 Chunking dataset, the results are summarized as below.
-
-        <table align="center">
-        <caption>Table. 2 Performance on CoNLL00 Chunking task</caption>
-        <tr>
-          <th>Method</th>
-          <th>Max(F1)</th> 
-          <th>Mean(F1)</th>
-          <th>Std(F1)</th>
-          <th>Time(h)</th>
-        </tr>
-        <tr>
-          <td> <a href="www.aclweb.org/anthology/N16-1030">Lample et al. 2016</a> </td>
-          <td> 94.49 </td>
-          <td> 94.37 </td>
-          <td> 0.07 </td>
-          <td> 26 </td>
-        </tr>
-        <tr>   
-          <td> <a href="www.cs.cmu.edu/~xuezhem/publications/P16-1101.pdf">Ma et al. 2016</a> </td>
-          <td> 95.93 </td>
-          <td> 95.80 </td>
-          <td> 0.13 </td>
-          <td> 6 </td>
-        </tr>
-        <tr>
-          <td> LM-LSTM-CRF (our) </td>
-          <td> <b>96.13</b> </td>
-          <td> <b>95.96</b> </td>
-          <td> 0.08 </td>
-          <td> 5 </td>
-        </tr>
-        </table>
 
       <h1 id="Ref">Bib Tex</h1>
 
