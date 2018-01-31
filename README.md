@@ -101,12 +101,12 @@ The default running commands for NER and POS tagging, and NP Chunking are:
 
 - Named Entity Recognition (NER):
 ```
-python train_wc.py --train_file ./data/ner/train.txt --dev_file ./data/ner/testa.txt --test_file ./data/ner/testb.txt --checkpoint ./checkpoint/ner_ --caseless --fine_tune --high_way --co_train
+python train_wc.py --train_file ./data/ner/train.txt --dev_file ./data/ner/testa.txt --test_file ./data/ner/testb.txt --checkpoint ./checkpoint/ner_ --caseless --fine_tune --high_way --co_train --least_iters 100
 ```
 
 - Part-of-Speech (POS) Tagging:
 ```
-python train_wc.py --train_file ./data/pos/train.txt --dev_file ./data/pos/testa.txt --test_file ./data/pos/testb.txt --eva_matrix a --checkpoint ./checkpoint/pos_ --lr 0.015 --caseless --fine_tune --high_way --co_train
+python train_wc.py --train_file ./data/pos/train.txt --dev_file ./data/pos/testa.txt --test_file ./data/pos/testb.txt --eva_matrix a --checkpoint ./checkpoint/pos_ --caseless --fine_tune --high_way --co_train
 ```
 
 - Noun Phrase (NP) Chunking:
@@ -120,7 +120,17 @@ For other datasets or tasks, you may wanna try different stopping parameters, es
 
 Here we compare LM-LSTM-CRF with recent state-of-the-art models on the CoNLL 2000 Chunking dataset, the CoNLL 2003 NER dataset, and the WSJ portion of the PTB POS Tagging dataset. All experiments are conducted on a GTX 1080 GPU.
 
-A serious bug was found on the ```bioes_to_span``` function, we are doing experiments and would update the results on NER & Chunking later.
+A serious bug was found on the ```bioes_to_span``` function, we are doing experiments and would update the results of NER & Chunking later.
+
+### NER
+
+When models are only trained on the WSJ portion of the PTB POS Tagging dataset, the results are summarized as below.
+
+|Model | Max(Acc) | Mean(Acc) | Std(Acc) | Time(h) |
+| ------------- |-------------| -----| -----| ---- |
+| LM-LSTM-CRF | **91.35** | **91.24** | 0.12 | 4 |
+| -- HighWay | 90.87 | 90.79 | 0.07 | 4 |
+| -- Co-Train | 91.23 | 90.95 | 0.34 | 2 |
 
 ### POS
 
@@ -135,18 +145,19 @@ When models are only trained on the WSJ portion of the PTB POS Tagging dataset, 
 ## Pretrained Model
 
 ### Evaluation
-We released pre-trained model on these three tasks. The checkpoint file can be downloaded at:
 
-| WSJ-PTB POS Tagging |
+We released pre-trained models on these three tasks. The checkpoint file can be downloaded at the following links. Notice that the NER model and Chunking model (coming soon) are trained on both the training set and the development set:
+
+| WSJ-PTB POS Tagging |  CoNLL03 NER |
 | ------------------- |
-| [Args](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmN1UwNjhHQkhUWEk/view?usp=sharing) |
-| [Model](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmSDlJRGRNandhMGs/view?usp=sharing) |
-
+| [Args](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmN1UwNjhHQkhUWEk/view?usp=sharing) | [Args](https://drive.google.com/file/d/1tGAQ0hu9AsIBdrqFn5fmDQ72Pk1I-o74/view?usp=sharing) | 
+| [Model](https://drive.google.com/a/illinois.edu/file/d/0B587SdKqutQmSDlJRGRNandhMGs/view?usp=sharing) | [Model](https://drive.google.com/file/d/1o9kjZV5EcHAhys3GPgl7EPGE5fuXyYjr/view?usp=sharing) | 
 
 Also, ```eval_wc.py``` is provided to load and run these checkpoints. Its usage can be accessed by command ````python eval_wc.py -h````, and a running command example is provided below:
 ```
 python eval_wc.py --load_arg checkpoint/ner/ner_4_cwlm_lstm_crf.json --load_check_point checkpoint/ner_ner_4_cwlm_lstm_crf.model --gpu 0 --dev_file ./data/ner/testa.txt --test_file ./data/ner/testb.txt
 ```
+
 ### Prediction
 
 To annotated raw text, ```seq_wc.py``` is provided to annotate un-annotated text. Its usage can be accessed by command ````python seq_wc.py -h````, and a running command example is provided below:
