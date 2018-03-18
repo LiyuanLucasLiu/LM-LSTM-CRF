@@ -7,10 +7,10 @@
 
 LM-LSTM-CRF documentation
 =========================
-This project provides high-performance character-aware sequence labeling tools and tutorials.
-The implementation is based on the PyTorch library.
 
-LM-LSTM-CRF achieves F1 score of 91.71+/-0.10 on CoNLL03 NER task, without using any additional corpus.
+This project provides high-performance character-aware sequence labeling tools, including [Training](#usage), [Evaluation](#evaluation) and [Prediction](#prediction). 
+
+Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. 
 
 .. toctree::
    :glob:
