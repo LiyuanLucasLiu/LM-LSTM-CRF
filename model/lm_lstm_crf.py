@@ -1,7 +1,7 @@
 """
 .. module:: lm_lstm_crf
     :synopsis: lm_lstm_crf
- 
+
 .. moduleauthor:: Liyuan Liu
 """
 
@@ -17,7 +17,7 @@ import model.highway as highway
 class LM_LSTM_CRF(nn.Module):
     """LM_LSTM_CRF model
 
-    args: 
+    args:
         tagset_size: size of label set
         char_size: size of char dictionary
         char_dim: size of char embedding
@@ -33,7 +33,7 @@ class LM_LSTM_CRF(nn.Module):
         in_doc_words: number of words that occurred in the corpus (used for language model prediction)
         highway_layers: number of highway layers
     """
-    
+
     def __init__(self, tagset_size, char_size, char_dim, char_hidden_dim, char_rnn_layers, embedding_dim, word_hidden_dim, word_rnn_layers, vocab_size, dropout_ratio, large_CRF=True, if_highway = False, in_doc_words = 2, highway_layers = 1):
 
         super(LM_LSTM_CRF, self).__init__()
@@ -115,7 +115,7 @@ class LM_LSTM_CRF(nn.Module):
             init_char_embedding: random initialize char embedding or not
             init_word_embedding: random initialize word embedding or not
         """
-        
+
         if init_char_embedding:
             utils.init_embedding(self.char_embeds.weight)
         if init_word_embedding:
@@ -145,7 +145,7 @@ class LM_LSTM_CRF(nn.Module):
         return:
             language model output (word_seq_len, in_doc_word), hidden
         """
-        
+
         embeds = self.char_embeds(sentence)
         d_embeds = self.dropout(embeds)
         lstm_out, hidden = self.forw_char_lstm(d_embeds)
@@ -179,7 +179,7 @@ class LM_LSTM_CRF(nn.Module):
         embeds = self.char_embeds(sentence)
         d_embeds = self.dropout(embeds)
         lstm_out, hidden = self.back_char_lstm(d_embeds)
-        
+
         tmpsize = position.size()
         position = position.unsqueeze(2).expand(tmpsize[0], tmpsize[1], self.char_hidden_dim)
         select_lstm_out = torch.gather(lstm_out, 0, position)
@@ -251,5 +251,5 @@ class LM_LSTM_CRF(nn.Module):
         #convert to crf
         crf_out = self.crf(d_lstm_out)
         crf_out = crf_out.view(self.word_seq_length, self.batch_size, self.tagset_size, self.tagset_size)
-        
+
         return crf_out

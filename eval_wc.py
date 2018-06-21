@@ -78,9 +78,9 @@ if __name__ == "__main__":
     print('start')
     if 'f' in args.eva_matrix:
 
-        test_f1, test_pre, test_rec, test_acc = evaluator.calc_score(ner_model, test_dataset_loader)
-
-        print(jd['checkpoint'] + ' test_f1: %.4f test_rec: %.4f test_pre: %.4f test_acc: %.4f\n' % (test_f1, test_rec, test_pre, test_acc))
+        result = evaluator.calc_score(ner_model, test_dataset_loader)
+        for label, (test_f1, test_pre, test_rec, test_acc, msg) in result.items():
+            print(jd['checkpoint'] +' : %s : test_f1: %.4f test_rec: %.4f test_pre: %.4f test_acc: %.4f | %s\n' % (label, test_f1, test_rec, test_pre, test_acc, msg))
 
     else:
 
