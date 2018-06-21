@@ -1,7 +1,7 @@
 """
 .. module:: utils
     :synopsis: utility tools
- 
+
 .. moduleauthor:: Liyuan Liu, Frank Xu
 """
 
@@ -48,7 +48,7 @@ def log_sum_exp(vec, m_size):
     """
     _, idx = torch.max(vec, 1)  # B * 1 * M
     max_score = torch.gather(vec, 1, idx.view(-1, 1, m_size)).view(-1, 1, m_size)  # B * M
-      
+
     return max_score.view(-1, m_size) + torch.log(torch.sum(torch.exp(vec - max_score.expand_as(vec)), 1)).view(-1, m_size)  # B * M
 
 
@@ -131,7 +131,7 @@ def generate_corpus_char(lines, if_shrink_c_feature=False, c_thresholds=1, if_sh
         c_threshold: threshold for shrinking char-dictionary
         if_shrink_w_feature: whether shrink word-dictionary
         w_threshold: threshold for shrinking word-dictionary
-        
+
     """
     features, labels, feature_map, label_map = generate_corpus(lines, if_shrink_feature=if_shrink_w_feature, thresholds=w_thresholds)
     char_count = dict()
@@ -177,7 +177,7 @@ def generate_corpus(lines, if_shrink_feature=False, thresholds=1):
         lines : corpus
         if_shrink_feature: whether shrink word-dictionary
         threshold: threshold for shrinking word-dictionary
-        
+
     """
     features = list()
     labels = list()
@@ -276,7 +276,7 @@ def read_features(lines, multi_docs = True):
                 tmp_fl = list()
         if len(tmp_fl) > 0:
             features.append(tmp_fl)
-     
+
         return features
 
 def shrink_embedding(feature_map, word_dict, word_embedding, caseless):
@@ -354,7 +354,7 @@ def load_embedding(emb_file, delimiter, feature_map, caseless, unk, shrink_to_tr
         feature_set = set([key.lower() for key in feature_map])
     else:
         feature_set = set([key for key in feature_map])
-        
+
     word_dict = dict()
     embedding_array = list()
     for line in open(emb_file, 'r'):
@@ -388,7 +388,7 @@ def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, casel
     """
     load embedding, indoc words would be listed before outdoc words
 
-    args: 
+    args:
         emb_file: path to embedding file
         delimiter: delimiter of lines
         feature_map: word dictionary
@@ -405,7 +405,7 @@ def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, casel
     else:
         feature_set = set([key for key in feature_map])
         full_feature_set = set([key for key in full_feature_set])
-    
+
     #ensure <unk> is 0
     word_dict = {v:(k+1) for (k,v) in enumerate(feature_set - set(['<unk>']))}
     word_dict['<unk>'] = 0
@@ -436,7 +436,7 @@ def load_embedding_wlm(emb_file, delimiter, feature_map, full_feature_set, casel
         elif not shrink_to_corpus:
             outdoc_word_array.append(line[0])
             outdoc_embedding_array.append(vector)
-    
+
     embedding_tensor_0 = torch.FloatTensor(np.asarray(indoc_embedding_array))
 
     if not shrink_to_corpus:
@@ -566,9 +566,9 @@ def construct_bucket_vb_wc(word_features, forw_features, fea_len, input_labels, 
         buckets[idx][6].append([1] * cur_len_1 + [0] * (thresholds[idx] - cur_len_1))  # has additional start, mask
         buckets[idx][7].append([len(f_f) + thresholds[idx] - len(f_l), cur_len_1])
     bucket_dataset = [CRFDataset_WC(torch.LongTensor(bucket[0]), torch.LongTensor(bucket[1]),
-                                   torch.LongTensor(bucket[2]), torch.LongTensor(bucket[3]),
-                                   torch.LongTensor(bucket[4]), torch.LongTensor(bucket[5]), 
-                                   torch.ByteTensor(bucket[6]), torch.LongTensor(bucket[7])) for bucket in buckets]
+                                    torch.LongTensor(bucket[2]), torch.LongTensor(bucket[3]),
+                                    torch.LongTensor(bucket[4]), torch.LongTensor(bucket[5]),
+                                    torch.ByteTensor(bucket[6]), torch.LongTensor(bucket[7])) for bucket in buckets]
     return bucket_dataset, forw_corpus, back_corpus
 
 
@@ -586,7 +586,7 @@ def construct_bucket_vb(input_features, input_labels, thresholds, pad_feature, p
         buckets[idx][0].append(feature + [pad_feature] * (thresholds[idx] - cur_len))
         buckets[idx][1].append([label[ind] * label_size + label[ind + 1] for ind in range(0, cur_len)] + [
             label[cur_len] * label_size + pad_label] + [pad_label * label_size + pad_label] * (
-                                   thresholds[idx] - cur_len_1))
+                                       thresholds[idx] - cur_len_1))
         buckets[idx][2].append([1] * cur_len_1 + [0] * (thresholds[idx] - cur_len_1))
     bucket_dataset = [CRFDataset(torch.LongTensor(bucket[0]), torch.LongTensor(bucket[1]), torch.ByteTensor(bucket[2]))
                       for bucket in buckets]
@@ -795,14 +795,14 @@ def init_embedding(input_embedding):
     Initialize embedding
     """
     bias = np.sqrt(3.0 / input_embedding.size(1))
-    nn.init.uniform(input_embedding, -bias, bias)
+    nn.init.uniform_(input_embedding, -bias, bias)
 
 def init_linear(input_linear):
     """
     Initialize linear transformation
     """
     bias = np.sqrt(6.0 / (input_linear.weight.size(0) + input_linear.weight.size(1)))
-    nn.init.uniform(input_linear.weight, -bias, bias)
+    nn.init.uniform_(input_linear.weight, -bias, bias)
     if input_linear.bias is not None:
         input_linear.bias.data.zero_()
 
@@ -813,11 +813,11 @@ def init_lstm(input_lstm):
     for ind in range(0, input_lstm.num_layers):
         weight = eval('input_lstm.weight_ih_l'+str(ind))
         bias = np.sqrt(6.0 / (weight.size(0)/4 + weight.size(1)))
-        nn.init.uniform(weight, -bias, bias)
+        nn.init.uniform_(weight, -bias, bias)
         weight = eval('input_lstm.weight_hh_l'+str(ind))
         bias = np.sqrt(6.0 / (weight.size(0)/4 + weight.size(1)))
-        nn.init.uniform(weight, -bias, bias)
-    
+        nn.init.uniform_(weight, -bias, bias)
+
     if input_lstm.bias:
         for ind in range(0, input_lstm.num_layers):
             weight = eval('input_lstm.bias_ih_l'+str(ind))

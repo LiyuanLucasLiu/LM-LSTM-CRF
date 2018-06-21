@@ -34,7 +34,7 @@ For training, a GPU is strongly recommended for speed. CPU is supported but trai
 
 ### PyTorch
 
-The code is based on PyTorch and **only supports PyTorch 0.3 now** (PyTorch 0.4 makes the current version of CRF cannot work properly). You can find installation instructions [here](http://pytorch.org/). 
+The code is based on PyTorch and **supports PyTorch 0.4 now** . You can find installation instructions [here](http://pytorch.org/).
 
 ### Dependencies
 
