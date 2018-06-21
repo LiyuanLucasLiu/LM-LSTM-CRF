@@ -375,8 +375,8 @@ class CRFDecode_vb():
         pointer = back_points[-1][:, self.end_tag]
         decode_idx[-1] = pointer
         for idx in range(len(back_points)-2, -1, -1):
-            input = back_points[idx]
+            back_point = back_points[idx]
             index = pointer.contiguous().view(-1,1)
-            pointer = torch.gather(input, 1, index).view(-1)
+            pointer = torch.gather(back_point, 1, index).view(-1)
             decode_idx[idx] = pointer
         return decode_idx
