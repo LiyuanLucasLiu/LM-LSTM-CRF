@@ -18,6 +18,7 @@ import sys
 from tqdm import tqdm
 import itertools
 import functools
+from multiprocessing.pool import Pool
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
@@ -123,9 +124,23 @@ if __name__ == "__main__":
     
     print('constructing dataset')
     # construct dataset
-    dataset, forw_corp, back_corp = utils.construct_bucket_mean_vb_wc(train_features, train_labels, l_map, c_map, f_map, args.caseless)
-    dev_dataset, forw_dev, back_dev = utils.construct_bucket_mean_vb_wc(dev_features, dev_labels, l_map, c_map, f_map, args.caseless)
-    test_dataset, forw_test, back_test = utils.construct_bucket_mean_vb_wc(test_features, test_labels, l_map, c_map, f_map, args.caseless)
+    def construct_bucket(x1, x2, x3, x4, x5, x6):
+        return utils.construct_bucket_mean_vb_wc(x1, x2, x3, x4, x5, x6)
+
+    pool = Pool(processes=3)
+
+    r1 = pool.apply_async(construct_bucket, (train_features, train_labels, l_map, c_map, f_map, args.caseless))
+    r2 = pool.apply_async(construct_bucket, (dev_features, dev_labels, l_map, c_map, f_map, args.caseless))
+    r3 = pool.apply_async(construct_bucket, (test_features, test_labels, l_map, c_map, f_map, args.caseless))
+
+    # close the pool
+    pool.close()
+    pool.join()
+
+    # get the return values from the processes
+    dataset, forw_corp, back_corp = r1.get()
+    dev_dataset, forw_dev, back_dev = r2.get()
+    test_dataset, forw_test, back_test = r3.get()  
     
     dataset_loader = [torch.utils.data.DataLoader(tup, args.batch_size, shuffle=True, drop_last=False) for tup in dataset]
     dev_dataset_loader = [torch.utils.data.DataLoader(tup, 50, shuffle=False, drop_last=False) for tup in dev_dataset]
