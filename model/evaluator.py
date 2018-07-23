@@ -113,11 +113,11 @@ class eval_batch:
             tp = self.truep_counts.get(label,1)
             fn = sum(self.fn_counts.get(label,{}).values())
             fp = sum(self.fp_counts.get(label,{}).values())
-            print(label, str(tp), str(fp), str(fn), str(self.totalp_counts.get(label,0)))
-            precision = tp / float(tp+fp)
-            recall = tp / float(tp+fn)
-            f = 2 * (precision * recall) / (precision + recall)
-            message = str(self.fn_counts[label])
+            # print(label, str(tp), str(fp), str(fn), str(self.totalp_counts.get(label,0)))
+            precision = tp / float(tp+fp+1e-9)
+            recall = tp / float(tp+fn+1e-9)
+            f = 2 * (precision * recall) / (precision + recall+1e-9)
+            message = str(self.fn_counts.get(label, {}))
             self.f1[label] = (f, precision, recall, 0, message)
         return self.f1
 

@@ -198,13 +198,19 @@ if __name__ == "__main__":
         # eval & save check_point
 
         if 'f' in args.eva_matrix:
-            dev_f1, dev_pre, dev_rec, dev_acc = evaluator.calc_score(ner_model, dev_dataset_loader)
+            dev_result = evaluator.calc_score(ner_model, dev_dataset_loader)
+            for label, (dev_f1, dev_pre, dev_rec, dev_acc, msg) in dev_result.items():
+                print('DEV : %s : dev_f1: %.4f dev_rec: %.4f dev_pre: %.4f dev_acc: %.4f | %s\n' % (label, dev_f1, dev_pre, dev_rec, dev_acc, msg))
+            (dev_f1, dev_pre, dev_rec, dev_acc, msg) = dev_result['total']
 
             if dev_f1 > best_f1:
                 patience_count = 0
                 best_f1 = dev_f1
 
-                test_f1, test_pre, test_rec, test_acc = evaluator.calc_score(ner_model, test_dataset_loader)
+                test_result = evaluator.calc_score(ner_model, test_dataset_loader)
+                for label, (test_f1, test_pre, test_rec, test_acc, msg) in test_result.items():
+                    print('TEST : %s : test_f1: %.4f test_rec: %.4f test_pre: %.4f test_acc: %.4f | %s\n' % (label, test_f1, test_rec, test_pre, test_acc, msg))
+                (test_f1, test_rec, test_pre, test_acc, msg) = test_result['total']
 
                 track_list.append(
                     {'loss': epoch_loss, 'dev_f1': dev_f1, 'dev_acc': dev_acc, 'test_f1': test_f1,
@@ -288,7 +294,7 @@ if __name__ == "__main__":
         if patience_count >= args.patience and args.start_epoch >= args.least_iters:
             break
 
-    # print best
+    #print best
     if 'f' in args.eva_matrix:
         eprint(args.checkpoint + ' dev_f1: %.4f dev_rec: %.4f dev_pre: %.4f dev_acc: %.4f test_f1: %.4f test_rec: %.4f test_pre: %.4f test_acc: %.4f\n' % (dev_f1, dev_rec, dev_pre, dev_acc, test_f1, test_rec, test_pre, test_acc))
     else:

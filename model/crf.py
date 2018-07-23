@@ -104,13 +104,13 @@ class CRFRepack:
         """
 
         if self.if_cuda:
-            fea_v = torch.Tensor(feature.transpose(0, 1)).cuda()
-            tg_v = torch.Tensor(target.transpose(0, 1)).unsqueeze(2).cuda()
-            mask_v = torch.Tensor(mask.transpose(0, 1)).cuda()
+            fea_v = feature.transpose(0, 1).cuda()
+            tg_v = target.transpose(0, 1).unsqueeze(2).cuda()
+            mask_v = mask.transpose(0, 1).cuda()
         else:
-            fea_v = torch.Tensor(feature.transpose(0, 1))
-            tg_v = torch.Tensor(target.transpose(0, 1)).contiguous().unsqueeze(2)
-            mask_v = torch.Tensor(mask.transpose(0, 1)).contiguous()
+            fea_v = feature.transpose(0, 1)
+            tg_v = target.transpose(0, 1).contiguous().unsqueeze(2)
+            mask_v = mask.transpose(0, 1).contiguous()
         return fea_v, tg_v, mask_v
 
     def repack_gd(self, feature, target, current):
@@ -124,13 +124,13 @@ class CRFRepack:
             feature (Seq_len, Batch_size), target (Seq_len * Batch_size), current (Seq_len * Batch_size, 1, 1)
         """
         if self.if_cuda:
-            fea_v = torch.Tensor(feature.transpose(0, 1)).cuda()
-            ts_v = torch.Tensor(target.transpose(0, 1)).cuda().view(-1)
-            cs_v = torch.Tensor(current.transpose(0, 1)).cuda().view(-1, 1, 1)
+            fea_v = feature.transpose(0, 1).cuda()
+            ts_v = target.transpose(0, 1).cuda().view(-1)
+            cs_v = current.transpose(0, 1).cuda().view(-1, 1, 1)
         else:
-            fea_v = torch.Tensor(feature.transpose(0, 1))
-            ts_v = torch.Tensor(target.transpose(0, 1)).contiguous().view(-1)
-            cs_v = torch.Tensor(current.transpose(0, 1)).contiguous().view(-1, 1, 1)
+            fea_v = feature.transpose(0, 1)
+            ts_v = target.transpose(0, 1).contiguous().view(-1)
+            cs_v = current.transpose(0, 1).contiguous().view(-1, 1, 1)
         return fea_v, ts_v, cs_v
 
     def convert_for_eval(self, target):
