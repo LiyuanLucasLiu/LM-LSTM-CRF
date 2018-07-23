@@ -198,7 +198,7 @@ if __name__ == "__main__":
                 cbs, _ = ner_model.word_pre_train_backward(b_f, cb_p)
                 loss = loss + args.lambda0 * crit_lm(cbs, cb_y.view(-1))
             loss.backward()
-            nn.utils.clip_grad_norm(ner_model.parameters(), args.clip_grad)
+            nn.utils.clip_grad_norm_(ner_model.parameters(), args.clip_grad)
             optimizer.step()
         epoch_loss /= tot_length
 

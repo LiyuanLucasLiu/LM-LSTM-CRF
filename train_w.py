@@ -185,7 +185,7 @@ if __name__ == "__main__":
             scores, hidden = ner_model.forward(fea_v)
             loss = crit.forward(scores, tg_v, mask_v)
             loss.backward()
-            nn.utils.clip_grad_norm(ner_model.parameters(), args.clip_grad)
+            nn.utils.clip_grad_norm_(ner_model.parameters(), args.clip_grad)
             optimizer.step()
             epoch_loss += utils.to_scalar(loss)
 
