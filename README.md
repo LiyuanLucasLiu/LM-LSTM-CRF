@@ -8,6 +8,8 @@ This project provides high-performance character-aware sequence labeling tools, 
 
 Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. 
 
+**A serious bug was found on the ```bioes_to_span``` function in the original implementation, please refer the numbers reported in the [Benchmarks](#benchmarks) section as the accurate performance. **
+
 The documents would be available [here](http://lm-lstm-crf.readthedocs.io/en/latest/).
 
 ## Quick Links
@@ -120,7 +122,7 @@ For other datasets or tasks, you may wanna try different stopping parameters, es
 
 Here we compare LM-LSTM-CRF with recent state-of-the-art models on the CoNLL 2000 Chunking dataset, the CoNLL 2003 NER dataset, and the WSJ portion of the PTB POS Tagging dataset. All experiments are conducted on a GTX 1080 GPU.
 
-A serious bug was found on the ```bioes_to_span``` function, we are doing experiments and would update the results of NER & Chunking later.
+A serious bug was found on the ```bioes_to_span``` function in the original implementation, please refer the following numbers as the accurate performance. 
 
 ### NER
 
