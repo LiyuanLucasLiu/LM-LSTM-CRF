@@ -8,7 +8,7 @@ This project provides high-performance character-aware sequence labeling tools, 
 
 Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. 
 
-**A serious bug was found on the ```bioes_to_span``` function in the original implementation, please refer the numbers reported in the [Benchmarks](#benchmarks) section as the accurate performance. **
+**Important:** A serious bug was found on the ```bioes_to_span``` function in the original implementation, please refer the numbers reported in the [Benchmarks](#benchmarks) section as the accurate performance.
 
 The documents would be available [here](http://lm-lstm-crf.readthedocs.io/en/latest/).
 
