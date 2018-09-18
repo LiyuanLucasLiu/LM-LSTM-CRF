@@ -8,6 +8,8 @@
 - **[AutoNER](https://shangjingbo1226.github.io/AutoNER/):** No line-by-line annotations -- train named entity taggers with distant supervision and get competitive performance. 🚀🚀🚀
 - **[LD-Net](https://github.com/LiyuanLucasLiu/LD-Net):** Efficient contextualized representations for practical NER models. 🚀🚀🚀
 
+--------------------------------
+
 This project provides high-performance character-aware sequence labeling tools, including [Training](#usage), [Evaluation](#evaluation) and [Prediction](#prediction). 
 
 Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. 
