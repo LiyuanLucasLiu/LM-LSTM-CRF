@@ -5,8 +5,8 @@
 [![Insight.io](https://insight.io/repoBadge/github.com/LiyuanLucasLiu/LM-LSTM-CRF)](https://insight.io/github.com/LiyuanLucasLiu/LM-LSTM-CRF)
 
 **NEWS**
-- **[AutoNER](https://shangjingbo1226.github.io/AutoNER/):** No line-by-line annotations -- train named entity taggers with distant supervision and get competitive performance. 🚀🚀🚀
 - **[LD-Net](https://github.com/LiyuanLucasLiu/LD-Net):** Efficient contextualized representations for practical NER models. 🚀🚀🚀
+- **[AutoNER](https://shangjingbo1226.github.io/AutoNER/):** No line-by-line annotations -- train named entity taggers with distant supervision and get competitive performance. 🚀🚀🚀
 
 --------------------------------
 
