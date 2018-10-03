@@ -57,7 +57,7 @@ class predict:
         current = None
 
         for f, y in zip(feature, label):
-            label = self.r_l_map[y]
+            label = self.r_l_map[y.item()]
 
             if label.startswith('B-'):
 
