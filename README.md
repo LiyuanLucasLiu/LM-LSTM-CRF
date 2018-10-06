@@ -4,9 +4,14 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Insight.io](https://insight.io/repoBadge/github.com/LiyuanLucasLiu/LM-LSTM-CRF)](https://insight.io/github.com/LiyuanLucasLiu/LM-LSTM-CRF)
 
-**NEWS**
-- **[LD-Net](https://github.com/LiyuanLucasLiu/LD-Net):** Efficient contextualized representations for practical NER models. 🚀🚀🚀
-- **[AutoNER](https://shangjingbo1226.github.io/AutoNER/):** No line-by-line annotations -- train named entity taggers with distant supervision and get competitive performance. 🚀🚀🚀
+**Check Our New NER Toolkit🚀🚀🚀**
+- **Inference**:
+  - **[LightNER](https://github.com/LiyuanLucasLiu/LightNER)**: inference w. models pre-trained / trained w. *any* following tools, *efficiently*. 
+- **Training**:
+  - **[LD-Net](https://github.com/LiyuanLucasLiu/LD-Net)**: train NER models w. efficient contextualized representations.
+  - **[VanillaNER](https://github.com/LiyuanLucasLiu/Vanilla_NER)**: train vanilla NER models w. pre-trained embedding.
+- **Distant Training**:
+  - **[AutoNER](https://shangjingbo1226.github.io/AutoNER/)**: train NER models w.o. line-by-line annotations and get competitive performance.
 
 --------------------------------
 
