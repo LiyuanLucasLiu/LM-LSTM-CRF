@@ -12,22 +12,22 @@ LM-LSTM-CRF documentation
 
 - **Inference**:
 
-  - **`LightNER <https://github.com/LiyuanLucasLiu/LightNER>`_**: inference w. models pre-trained / trained w. *any* following tools, *efficiently*. 
+  - `LightNER <https://github.com/LiyuanLucasLiu/LightNER>`_: inference w. models pre-trained / trained w. *any* following tools, *efficiently*. 
 
 - **Training**:
 
-  - **`LD-Net <https://github.com/LiyuanLucasLiu/LD-Net>`_**: train NER models w. efficient contextualized representations.
-  - **`VanillaNER <https://github.com/LiyuanLucasLiu/Vanilla_NER>`_**: train vanilla NER models w. pre-trained embedding.
+  - `LD-Net <https://github.com/LiyuanLucasLiu/LD-Net>`_: train NER models w. efficient contextualized representations.
+  - `VanillaNER <https://github.com/LiyuanLucasLiu/Vanilla_NER>`_: train vanilla NER models w. pre-trained embedding.
 
 - **Distant Training**:
 
-  - **`AutoNER <https://shangjingbo1226.github.io/AutoNER/>`_**: train NER models w.o. line-by-line annotations and get competitive performance.
+  - `AutoNER <https://shangjingbo1226.github.io/AutoNER/>`_: train NER models w.o. line-by-line annotations and get competitive performance.
 
 --------------------------
 
 This project provides high-performance character-aware sequence labeling tools, including [Training](#usage), [Evaluation](#evaluation) and [Prediction](#prediction). 
 
-Details about LM-LSTM-CRF can be accessed [here](http://arxiv.org/abs/1709.04109), and the implementation is based on the PyTorch library. 
+Details about LM-LSTM-CRF can be accessed `here <http://arxiv.org/abs/1709.04109>`_, and the implementation is based on the PyTorch library. 
 
 .. toctree::
    :glob:
