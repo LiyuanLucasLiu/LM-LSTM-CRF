@@ -211,7 +211,7 @@ if __name__ == "__main__":
         if 'f' in args.eva_matrix:
             dev_result = evaluator.calc_score(ner_model, dev_dataset_loader)
             for label, (dev_f1, dev_pre, dev_rec, dev_acc, msg) in dev_result.items():
-                print('DEV : %s : dev_f1: %.4f dev_rec: %.4f dev_pre: %.4f dev_acc: %.4f | %s\n' % (label, dev_f1, dev_pre, dev_rec, dev_acc, msg))
+                print('DEV : %s : dev_f1: %.4f dev_rec: %.4f dev_pre: %.4f dev_acc: %.4f | %s\n' % (label, dev_f1, dev_rec, dev_pre, dev_acc, msg))
             (dev_f1, dev_pre, dev_rec, dev_acc, msg) = dev_result['total']
 
             if dev_f1 > best_f1:
