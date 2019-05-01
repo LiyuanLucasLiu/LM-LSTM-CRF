@@ -1,0 +1,8 @@
+title: Pytorch LM-LSTM-CRF Ner config for Acharya
+author: Vimal Menon
+cmd:
+        train: python3 train_wc.py --train_file ./data/ner/train.txt --checkpoint ./checkpoint/ner_ --caseless --fine_tune --high_way --co_train --least_iters 100
+        eval: python3 seq_wc.py --load_arg checkpoint/ner/ner_4_cwlm_lstm_crf.json --load_check_point checkpoint/ner_ner_4_cwlm_lstm_crf.model --gpu 0 --input_file ./data/ner2003/test.txt --output_file output.txt
+        type: file
+        in: file
+        out: file
