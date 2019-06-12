@@ -43,7 +43,7 @@ class predict:
             feature (list): words list
             label (list): label list
         """
-        return '\n'.join(map(lambda t: t[0] + ' '+ self.r_l_map[t[1].items()], zip(feature, label)))
+        return '\n'.join(map(lambda t: t[0] + ' '+ self.r_l_map[t[1].item()], zip(feature, label)))
 
     def decode_s(self, feature, label):
         """
