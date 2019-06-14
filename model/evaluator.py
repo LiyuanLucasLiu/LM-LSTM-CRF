@@ -104,7 +104,7 @@ class eval_batch:
         precision = self.overlap_count / float(self.guess_count)
         recall = self.overlap_count / float(self.gold_count)
         if precision == 0.0 or recall == 0.0:
-            return {'total', (0.0, 0.0, 0.0, 0.0, '')}
+            return {'total': (0.0, 0.0, 0.0, 0.0, '')}
         f = 2 * (precision * recall) / (precision + recall)
         accuracy = float(self.correct_labels) / self.total_labels
         message=""
