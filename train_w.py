@@ -19,6 +19,9 @@ from tqdm import tqdm
 import itertools
 import functools
 
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Learning with BLSTM-CRF')
     parser.add_argument('--rand_embedding', action='store_true', help='random initialize word embedding')
