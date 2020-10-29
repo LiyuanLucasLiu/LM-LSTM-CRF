@@ -25,10 +25,10 @@ def eprint(*args, **kwargs):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Learning with BLSTM-CRF')
     parser.add_argument('--rand_embedding', action='store_true', help='random initialize word embedding')
-    parser.add_argument('--emb_file', default='./embedding/glove.6B.100d.txt', help='path to pre-trained embedding')
-    parser.add_argument('--train_file', default='./data/ner2003/eng.train.iobes', help='path to training file')
-    parser.add_argument('--dev_file', default='./data/ner2003/eng.testa.iobes', help='path to development file')
-    parser.add_argument('--test_file', default='./data/ner2003/eng.testb.iobes', help='path to test file')
+    parser.add_argument('--emb_file', default='./data/glove.6B.100d.txt', help='path to pre-trained embedding')
+    parser.add_argument('--train_file', default='./data/ner2003/eng.train', help='path to training file')
+    parser.add_argument('--dev_file', default='./data/ner2003/eng.testa', help='path to development file')
+    parser.add_argument('--test_file', default='./data/ner2003/eng.testb', help='path to test file')
     parser.add_argument('--gpu', type=int, default=0, help='gpu id, set to -1 if use cpu mode')
     parser.add_argument('--batch_size', type=int, default=10, help='batch size (10)')
     parser.add_argument('--unk', default='unk', help='unknow-token in pre-trained embedding')
@@ -59,8 +59,8 @@ if __name__ == "__main__":
     if args.gpu >= 0:
         torch.cuda.set_device(args.gpu)
 
-    print('setting:')
-    print(args)
+   # print('setting:')
+ #   print(args)
 
     # load corpus
     print('loading corpus')
@@ -183,7 +183,10 @@ if __name__ == "__main__":
                 itertools.chain.from_iterable(dataset_loader), mininterval=2,
                 desc=' - Tot it %d (epoch %d)' % (tot_length, args.start_epoch), leave=False, file=sys.stdout):
 
-            fea_v, tg_v, mask_v = packer.repack_vb(feature, tg, mask)
+            #fea_v, tg_v, mask_v = packer.repack_vb(feature, tg, mask)
+            fea_v, tg_v, mask_v = packer.repack_vb(feature.type(torch.FloatTensor), tg.type(torch.FloatTensor),
+             mask.type(torch.FloatTensor))
+
             ner_model.zero_grad()
             scores, hidden = ner_model.forward(fea_v)
             loss = crit.forward(scores, tg_v, mask_v)
