@@ -221,7 +221,7 @@ if __name__ == "__main__":
                 test_result = evaluator.calc_score(ner_model, test_dataset_loader)
                 for label, (test_f1, test_pre, test_rec, test_acc, msg) in test_result.items():
                     print('TEST : %s : test_f1: %.4f test_rec: %.4f test_pre: %.4f test_acc: %.4f | %s\n' % (label, test_f1, test_rec, test_pre, test_acc, msg))
-                (test_f1, test_rec, test_pre, test_acc, msg) = test_result['total']
+                (test_f1, test_pre, test_rec, test_acc, msg) = test_result['total']
 
                 track_list.append(
                     {'loss': epoch_loss, 'dev_f1': dev_f1, 'dev_acc': dev_acc, 'test_f1': test_f1,
