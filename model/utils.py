@@ -527,7 +527,9 @@ def construct_bucket_vb_wc(word_features, forw_features, fea_len, input_labels, 
     Construct bucket by thresholds for viterbi decode, word-level and char-level
     """
     # construct corpus for language model pre-training
-    forw_corpus = [pad_char_feature] + list(reduce(lambda x, y: x + [pad_char_feature] + y, forw_features)) + [pad_char_feature]
+    forw_corpus = [pad_char_feature]
+    for forw_feature in forw_features:
+        forw_corpus.extend(forw_feature + [pad_char_feature])
     back_corpus = forw_corpus[::-1]
     # two way construct, first build the bucket, then calculate padding length, then do the padding
     buckets = [[[], [], [], [], [], [], [], []] for ind in range(len(thresholds))]
